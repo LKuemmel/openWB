@@ -127,6 +127,12 @@ function processEvuMsg (mqttmsg, mqttpayload) {
 			directShow(mqttpayload, '#evupf3div');
 			visibilityRow('#powerfaktorEvuStatusId', '#evupf1div', '#evupf2div', '#evupf3div');
 			break;
+		case "openWB/evu/faultState":
+			directShow(mqttpayload, '#faultStateEvu');
+			break;
+		case "openWB/evu/faultStr":
+			textShow(mqttpayload, '#faultStrEvu');
+			break;
 	}
 }
 
@@ -170,6 +176,12 @@ function processPvMsg (mqttmsg, mqttpayload) {
 			visibilityValue('#inverter2 .gesamtertragPvRow', '#inverter2 .pvwattdiv');
 			break;
 	}
+	if ( mqttmsg.match( /^openwb\/pv\/[1-2]\/faultState$/i ) ) {
+		directShow(mqttpayload, '#faultStatePv');
+	}
+	else if ( mqttmsg.match( /^openwb\/pv\/[1-2]\/faultStr$/i ) ) {
+		textShow(mqttpayload, '#faultStrPv');
+	}
 }
 
 function processBatMsg (mqttmsg, mqttpayload) {
@@ -192,6 +204,12 @@ function processBatMsg (mqttmsg, mqttpayload) {
 			break;
 		case "openWB/housebattery/boolHouseBatteryConfigured":
 			visibilityCard('#speicher', mqttpayload);
+			break;
+		case "openWB/housebattery/faultState":
+			directShow(mqttpayload, '#faultStateBat');
+			break;
+		case "openWB/housebattery/faultStr":
+			textShow(mqttpayload, '#faultStrBat');
 			break;
 	}
 }
@@ -249,6 +267,12 @@ function processLpMsg (mqttmsg, mqttpayload) {
 	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/W$/i ) ) {
 		directShow(mqttpayload, '#lp' + index + ' .ladeleistung');
 		visibilityValue('#lp' + index + ' .ladeleistungRow', '#lp' + index + ' .ladeleistung');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultState$/i ) ) {
+		directShow(mqttpayload, '#faultStateLp');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultStr$/i ) ) {
+		textShow(mqttpayload, '#faultStrLp');
 	}
 	else {
 		switch (mqttmsg) {
@@ -346,6 +370,10 @@ function invertShow(mqttpayload, variable) {
 	var value = parseInt(mqttpayload) * -1;
 	var valueStr = value.toLocaleString(undefined) ;
 	$(variable).text(valueStr);
+}
+
+function textShow(mqttpayload, variable) {
+	$(variable).text(mqttpayload);
 }
 
 //show only values over 100

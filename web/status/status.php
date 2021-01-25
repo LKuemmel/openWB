@@ -279,6 +279,14 @@
 							<div class="table-responsive">
 								<table class="table table-sm ">
 									<tbody>
+										<tr>
+											<th scope="row">Störungsstatus</th>
+											<td class=faultStateLP></td>
+										</tr>
+										<tr>
+											<th scope="row">Störungsbeschreibung</th>
+											<td class=faultStrLP></td>
+										</tr>
 										<tr class=stromvorgabeRow>
 											<th scope="row">Ladestromvorgabe [A]</th>
 											<td class=stromvorgabe></td>
@@ -294,6 +302,14 @@
 										<tr class=socRow>
 											<th scope="row">SoC [%]</th>
 											<td class=soc></td>
+										</tr>
+										<tr>
+											<th scope="row">Störungsstatus</th>
+											<td class=faultStateSocLP></td>
+										</tr>
+										<tr>
+											<th scope="row">Störungsbeschreibung</th>
+											<td class=faultStrSocLP></td>
 										</tr>
 									</tbody>
 								</table>
@@ -366,6 +382,14 @@
 						<div class="table-responsive">
 							<table class="table" id="evu1">
 								<tbody>
+									<tr>
+										<th scope="row">Störungsstatus</th>
+										<td><div id="faultStateEvu"></div></td>
+									</tr>
+									<tr id="faultStrEvuRow">
+										<th scope="row">Störungsbeschreibung</th>
+										<td><div id="faultStrEvu"></div></td>
+									</tr>
 									<tr id="schieflastEvuStatusId">
 										<th scope="row">Schieflast [A]</th>
 										<td><div id="schieflastdiv"></div></td>
@@ -439,6 +463,7 @@
 						<div class="table-responsive">
 							<table class="table">
 								<tbody>
+								<tr>
 									<tr id=pvCounterRow>
 										<th scope="row">Counter</th>
 										<td><div id="pvcounterdiv"></div></td>
@@ -487,6 +512,13 @@
 							<div class="table-responsive">
 								<table class="table">
 									<tbody>
+										<th scope="row">Störungsstatus</th>
+											<td class=faultStatePv></td>
+										</tr>
+										<tr id="faultStrPvRow">
+											<th scope="row">Störungsbeschreibung</th>
+											<td class=faultStrPv></td>
+										</tr>
 										<tr class=leistungPvRow>
 											<th scope="row">Leistung [W]</th>
 											<td class=></td>
@@ -523,6 +555,13 @@
 						<div class="table-responsive">
 							<table class="table">
 								<tbody>
+									<th scope="row">Störungsstatus</th>
+										<td><div id="faultStateBat"></div></td>
+									</tr>
+									<tr id="faultStrbatRow">
+										<th scope="row">Störungsbeschreibung</th>
+										<td><div id="faultStrBat"></div></td>
+									</tr>
 									<tr id=geladenRow>
 										<th scope="row">geladen [kWh]</th>
 										<td><div id="speicherikwhdiv"></div></td>
