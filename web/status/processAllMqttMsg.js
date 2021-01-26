@@ -115,7 +115,7 @@ function processEvuMsg (mqttmsg, mqttpayload) {
 			visibilityRow('#powerfaktorEvuStatusId', '#evupf1div', '#evupf2div', '#evupf3div');
 			break;
 		case "openWB/evu/faultState":
-			directShow(mqttpayload, '#faultStateEvu');
+			setWarningLevel(mqttpayload, '#faultStrEvuRow');
 			break;
 		case "openWB/evu/faultStr":
 			textShow(mqttpayload, '#faultStrEvu');
@@ -127,8 +127,8 @@ function processPvMsg (mqttmsg, mqttpayload) {
 	switch(mqttmsg){
 		case "openWB/pv/boolPVConfigured":
 			visibilityCard('#pvGes', mqttpayload);
-			visibilityCard('#inverter1', 0);
-			visibilityCard('#inverter2', 0);
+			visibilityCard('#inverter1', mqttpayload);
+			visibilityCard('#inverter2', mqttpayload);
 			break;
 		case "openWB/pv/CounterTillStartPvCharging":
 			noZeroShow(mqttpayload, '#pvcounterdiv');
@@ -158,12 +158,12 @@ function processPvMsg (mqttmsg, mqttpayload) {
 		case "openWB/pv/Modul2W":
 			invertShow(mqttpayload, '#inverter2 .pvwattdiv');
 			break;
-	}
-	if ( mqttmsg.match( /^openwb\/pv\/[1-2]\/faultState$/i ) ) {
-		directShow(mqttpayload, '#faultStatePv');
-	}
-	else if ( mqttmsg.match( /^openwb\/pv\/[1-2]\/faultStr$/i ) ) {
-		textShow(mqttpayload, '#faultStrPv');
+		case "openWB/pv/1/faultState":
+			setWarningLevel(mqttpayload, '#faultStrPvRow');
+			break;
+		case "openWB/pv/1/faultStr":
+			textShow(mqttpayload, '#faultStrPv');
+			break;
 	}
 }
 
@@ -187,7 +187,7 @@ function processBatMsg (mqttmsg, mqttpayload) {
 			visibilityCard('#speicher', mqttpayload);
 			break;
 		case "openWB/housebattery/faultState":
-			directShow(mqttpayload, '#faultStateBat');
+			setWarningLevel(mqttpayload, '#faultStrBatRow');
 			break;
 		case "openWB/housebattery/faultStr":
 			textShow(mqttpayload, '#faultStrBat');
@@ -247,10 +247,10 @@ function processLpMsg (mqttmsg, mqttpayload) {
 		directShow(mqttpayload, '#lp' + index + ' .ladeleistung');
 	}
 	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultState$/i ) ) {
-		directShow(mqttpayload, '#faultStateLp');
+		setWarningLevel(mqttpayload, '#lp' + index + ' .faultStrLpRow');
 	}
 	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultStr$/i ) ) {
-		textShow(mqttpayload, '#faultStrLp');
+		textShow(mqttpayload, '#lp' + index + ' .faultStrLp');
 	}
 	else {
 		switch (mqttmsg) {
@@ -363,6 +363,21 @@ function invertShow(mqttpayload, variable) {
 
 function textShow(mqttpayload, variable) {
 	$(variable).text(mqttpayload);
+}
+
+// shows table row colored regarding to the fault state
+function setWarningLevel(mqttpayload, variable) {
+	switch (mqttpayload) {
+		case "0":
+			$(variable).removeClass("text-warning").removeClass("text-danger");
+			break;
+		case "1":
+			$(variable).addClass("text-warning").removeClass("text-danger");
+			break;
+		case "2":
+			$(variable).addClass("text-danger").removeClass("text-warning");
+			break;
+	}
 }
 
 //show only values over 100

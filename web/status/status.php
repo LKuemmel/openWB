@@ -181,37 +181,33 @@
 							<div class="table-responsive">
 								<table class="table table-sm ">
 									<tbody>
-										<tr>
-											<th scope="row">Störungsstatus</th>
-											<td class=faultStateLP></td>
-										</tr>
-										<tr>
+										<tr class="faultStrLpRow">
 											<th scope="row">Störungsbeschreibung</th>
-											<td class=faultStrLP></td>
+											<td class="faultStrLp"></td>
 										</tr>
-										<tr class=stromvorgabeRow>
+										<tr class="stromvorgabeRow">
 											<th scope="row">Ladestromvorgabe [A]</th>
-											<td class=stromvorgabe></td>
+											<td class="stromvorgabe"></td>
 										</tr>
-										<tr class=ladeleistungRow>
+										<tr class="ladeleistungRow">
 											<th scope="row">Ladeleistung [W]</th>
-											<td class=ladeleistung></td>
+											<td class="ladeleistung"></td>
 										</tr>
-										<tr class=kWhCounterRow>
+										<tr class="kWhCounterRow">
 											<th scope="row">Zählerstand [kWh]</th>
 											<td class="kWhCounter"></td>
 										</tr>
-										<tr class=socRow>
+										<tr class="socRow">
 											<th scope="row">SoC [%]</th>
-											<td class=soc></td>
+											<td class="soc"></td>
 										</tr>
 										<tr>
 											<th scope="row">Störungsstatus</th>
-											<td class=faultStateSocLP></td>
+											<td class="faultStateSocLP"></td>
 										</tr>
 										<tr>
 											<th scope="row">Störungsbeschreibung</th>
-											<td class=faultStrSocLP></td>
+											<td class="faultStrSocLP"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -227,23 +223,23 @@
 										</tr>
 									</head>
 									<tbody>
-										<tr class=spannungRow>
+										<tr class="spannungRow">
 											<th scope="row">Spannung [V]</th>
-											<td class=spannungP1></td>
-											<td class=spannungP2></td>
-											<td class=spannungP3></td>
+											<td class="spannungP1"></td>
+											<td class="spannungP2"></td>
+											<td class="spannungP3"></td>
 										</tr>
-										<tr class=powerFaktorRow>
+										<tr class="powerFaktorRow">
 											<th scope="row">Power Faktor</th>
-											<td class=powerFaktorP1></td>
-											<td class=powerFaktorP2></td>
-											<td class=powerFaktorP3></td>
+											<td class="powerFaktorP1"></td>
+											<td class="powerFaktorP2"></td>
+											<td class="powerFaktorP3"></td>
 										</tr>
-										<tr class=stromstaerkeRow>
+										<tr class="stromstaerkeRow">
 											<th scope="row">Stromstärke [A]</th>
-											<td class=stromstaerkeP1></td>
-											<td class=stromstaerkeP2></td>
-											<td class=stromstaerkeP3></td>
+											<td class="stromstaerkeP1"></td>
+											<td class="stromstaerkeP2"></td>
+											<td class="stromstaerkeP3"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -261,11 +257,11 @@
 						<div class="table-responsive">
 							<table class="table">
 								<tbody>
-									<tr id=ladeleistungAllRow>
+									<tr id="ladeleistungAllRow">
 										<th scope="row">Ladeleistung [W]</th>
 										<td><div id="ladeleistungAll"></div></td>
 									</tr>
-									<tr id=kWhCounterAllRow>
+									<tr id="kWhCounterAllRow">
 										<th scope="row">Zählerstand [kWh]</th>
 										<td><div id="kWhCounterAll"></div></td>
 									</tr>
@@ -284,10 +280,6 @@
 						<div class="table-responsive">
 							<table class="table" id="evu1">
 								<tbody>
-									<tr>
-										<th scope="row">Störungsstatus</th>
-										<td><div id="faultStateEvu"></div></td>
-									</tr>
 									<tr id="faultStrEvuRow">
 										<th scope="row">Störungsbeschreibung</th>
 										<td><div id="faultStrEvu"></div></td>
@@ -326,25 +318,25 @@
 									</tr>
 								</head>
 								<tbody>
-									<tr id =spannungEvuStatusId>
+									<tr id="spannungEvuStatusId">
 										<th scope="row">Spannung [V]</th>
 										<td><div id="evuv1div"></div></td>
 										<td><div id="evuv2div"></div></td>
 										<td><div id="evuv3div"></div></td>
 									</tr>
-									<tr id =stromstaerkeEvuStatusId>
+									<tr id="stromstaerkeEvuStatusId">
 										<th scope="row">Stromstärke [A]</th>
 										<td><div id="bezuga1div"></div></td>
 										<td><div id="bezuga2div"></div></td>
 										<td><div id="bezuga3div"></div></td>
 									</tr>
-									<tr id =leistungEvuStatusId>
+									<tr id="leistungEvuStatusId">
 										<th scope="row">Leistung [W]</th>
 										<td><div id="bezugw1div"></div></td>
 										<td><div id="bezugw2div"></div></td>
 										<td><div id="bezugw3div"></div></td>
 									</tr>
-									<tr id =powerfaktorEvuStatusId>
+									<tr id="powerfaktorEvuStatusId">
 										<th scope="row">Power Faktor</th>
 										<td><div id="evupf1div"></div></td>
 										<td><div id="evupf2div"></div></td>
@@ -366,27 +358,31 @@
 							<table class="table">
 								<tbody>
 								<tr>
-									<tr id=pvCounterRow>
+									<tr id="faultStrPvRow">
+										<th scope="row">Störungsbeschreibung</th>
+										<td id="faultStrPv"></td>
+									</tr>
+									<tr id="pvCounterRow">
 										<th scope="row">Counter</th>
 										<td><div id="pvcounterdiv"></div></td>
 									</tr>
-									<tr id=leistungRow>
+									<tr id="leistungRow">
 										<th scope="row">Leistung [W]</th>
 										<td><div id="pvwattdiv"></div></td>
 									</tr>
-									<tr id=gesamtertragRow>
+									<tr id="gesamtertragRow">
 										<th scope="row">Gesamtertrag [kWh]</th>
 										<td><div id="pvkwhdiv"></div></td>
 									</tr>
-									<tr id=tagesertragRow>
+									<tr id="tagesertragRow">
 										<th scope="row">Tagesertrag [kWh]</th>
 										<td><div id="daily_pvkwhdiv"></div></td>
 									</tr>
-									<tr id=monatsertragRow>
+									<tr id="monatsertragRow">
 										<th scope="row">Monatsertrag [kWh]</th>
 										<td><div id="monthly_pvkwhdiv"></div></td>
 									</tr>
-									<tr id=jahresertragRow>
+									<tr id="jahresertragRow">
 										<th scope="row">Jahresertrag [kWh]</th>
 										<td><div id="yearly_pvkwhdiv"></div></td>
 									</tr>
@@ -414,32 +410,25 @@
 							<div class="table-responsive">
 								<table class="table">
 									<tbody>
-										<th scope="row">Störungsstatus</th>
-											<td class=faultStatePv></td>
-										</tr>
-										<tr id="faultStrPvRow">
-											<th scope="row">Störungsbeschreibung</th>
-											<td class=faultStrPv></td>
-										</tr>
-										<tr class=leistungPvRow>
+										<tr class="leistungPvRow">
 											<th scope="row">Leistung [W]</th>
-											<td class=></td>
+											<td class=""></td>
 										</tr>
-										<tr class=gesamtertragPvRow>
+										<tr class="gesamtertragPvRow">
 											<th scope="row">Gesamtertrag [kWh]</th>
-											<td class=pvwattdiv></td>
+											<td class="pvwattdiv"></td>
 										</tr>
-										<tr id=tagesertragPvRow>
+										<tr class="tagesertragPvRow">
 											<th scope="row">Tagesertrag [kWh]</th>
-											<td><div id=""></div></td>
+											<td><div class=""></div></td>
 										</tr>
-										<tr id=monatsertragPvRow>
+										<tr class="monatsertragPvRow">
 											<th scope="row">Monatsertrag [kWh]</th>
-											<td><div id=""></div></td>
+											<td><div class=""></div></td>
 										</tr>
-										<tr id=jahresertragPvRow>
+										<tr class="jahresertragPvRow">
 											<th scope="row">Jahresertrag [kWh]</th>
-											<td><div id=""></div></td>
+											<td><div class=""></div></td>
 										</tr>
 									</tbody>
 								</table>
@@ -457,26 +446,23 @@
 						<div class="table-responsive">
 							<table class="table">
 								<tbody>
-									<th scope="row">Störungsstatus</th>
-										<td><div id="faultStateBat"></div></td>
-									</tr>
-									<tr id="faultStrbatRow">
+									<tr id="faultStrBatRow">
 										<th scope="row">Störungsbeschreibung</th>
 										<td><div id="faultStrBat"></div></td>
 									</tr>
-									<tr id=geladenRow>
+									<tr id="geladenRow">
 										<th scope="row">geladen [kWh]</th>
 										<td><div id="speicherikwhdiv"></div></td>
 									</tr>
-									<tr id=entladenRow>
+									<tr id="entladenRow">
 										<th scope="row">entladen [kWh]</th>
 										<td><div id="speicherekwhdiv"></div></td>
 									</tr>
-									<tr id=wBatRow>
+									<tr id="wBatRow">
 										<th scope="row">Leistung [W]</th>
 										<td><div id="wBatDiv"></div></td>
 									</tr>
-									<tr id=socBatRow>
+									<tr id="socBatRow">
 										<th scope="row">SoC [%]</th>
 										<td><div id="socBatDiv"></div></td>
 									</tr>
@@ -496,17 +482,17 @@
 							<div class="table-responsive">
 								<table class="table">
 									<tbody>
-										<tr class=leistungVerbraucherRow>
+										<tr class="leistungVerbraucherRow">
 											<th scope="row">Leistung [W]</th>
-											<td class=verbraucherWatt></td>
+											<td class="verbraucherWatt"></td>
 										</tr>
-										<tr class=importVerbraucherRow>
+										<tr class="importVerbraucherRow">
 											<th scope="row">Import [kWh]</th>
-											<td class=importVerbraucher></td>
+											<td class="importVerbraucher"></td>
 										</tr>
-										<tr class=exportVerbraucherRow>
+										<tr class="exportVerbraucherRow">
 											<th scope="row">Export [kWh]</th>
-											<td class=exportVerbraucher></td>
+											<td class="exportVerbraucher"></td>
 										</tr>
 									</tbody>
 								</table>
