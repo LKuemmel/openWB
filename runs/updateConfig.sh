@@ -170,6 +170,25 @@ updateConfig(){
 	if ! grep -Fq "sdm120modbusllid3s2=" $ConfigFile; then
 		echo "sdm120modbusllid3s2=10" >> $ConfigFile
 	fi
+	# upgrade from old "none" to 254
+	if grep -Fq "sdm120modbusllid2=none" $ConfigFile; then
+		echo "sdm120modbusllid2=254" >> $ConfigFile
+	fi
+	if grep -Fq "sdm120modbusllid3=none" $ConfigFile; then
+		echo "sdm120modbusllid3=254" >> $ConfigFile
+	fi
+	if grep -Fq "sdm120modbusllid2s1=none" $ConfigFile; then
+		echo "sdm120modbusllid2s1=254" >> $ConfigFile
+	fi
+	if grep -Fq "sdm120modbusllid3s1=none" $ConfigFile; then
+		echo "sdm120modbusllid3s1=254" >> $ConfigFile
+	fi
+	if grep -Fq "sdm120modbusllid2s2=none" $ConfigFile; then
+		echo "sdm120modbusllid2s2=254" >> $ConfigFile
+	fi
+	if grep -Fq "sdm120modbusllid3s2=none" $ConfigFile; then
+		echo "sdm120modbusllid3s2=254" >> $ConfigFile
+	fi
 	if ! grep -Fq "evsewifiiplp1=" $ConfigFile; then
 		echo "evsewifiiplp1=192.168.0.25" >> $ConfigFile
 	fi
@@ -1028,8 +1047,9 @@ updateConfig(){
 		else
 			echo "etprovideraktiv=0" >> $ConfigFile
 		fi
-		echo "tibbertoken=demo" >> $ConfigFile
-		echo "tibberhomeid=demo" >> $ConfigFile
+		# tibber demo settings
+		echo "tibbertoken=d1007ead2dc84a2b82f0de19451c5fb22112f7ae11d19bf2bedb224a003ff74a" >> $ConfigFile
+		echo "tibberhomeid=c70dcbe5-4485-4821-933d-a8a86452737b" >> $ConfigFile
 	fi
 	# remove obsolete line from config
 	if grep -Fq "awattaraktiv=" $ConfigFile; then
@@ -1708,6 +1728,9 @@ updateConfig(){
 	fi
 	if ! grep -Fq "rseenabled=" $ConfigFile; then
 		echo "rseenabled=0" >> $ConfigFile
+	fi
+	if ! grep -Fq "u1p3schaltparam=" $ConfigFile; then
+		echo "u1p3schaltparam=8" >> $ConfigFile
 	fi
 
 	echo "Config file Update done."
