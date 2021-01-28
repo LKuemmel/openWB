@@ -73,6 +73,17 @@
 		#electricityPriceChartCanvasDiv {
 			height: 150px;
 		}
+
+		.cpCard .card-header .collPlus {
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			content: "\f146";
+			float: left; 
+		}
+		.cpCard .card-header.collapsed .collPlus {
+			/* symbol for "collapsed" panels */
+			content: "\f0fe"; 
+		}
 	</style>
 	<!-- important scripts to be loaded -->
 	<script src="js/jquery-3.4.1.min.js"></script>
@@ -95,7 +106,8 @@
 		}
 		var themeCookie = getCookie('openWBTheme');
 		// include special Theme style
-		$('head').append('<link rel="stylesheet" href="themes/' + themeCookie + '/style.css?v=23122020">');
+		$('head').append('<link rel="stylesheet" href="themes/' + themeCookie + '/style.css?v=23122021">');
+		console.log('<link rel="stylesheet" href="themes/' + themeCookie + '/style.css?v=23122021">');
 	</script>
 </head>
 
@@ -128,50 +140,178 @@
 	<!-- Landing Page -->
 	<div id="nav-placeholder"></div>
 	<div class="container">
-		<div class="row py-1 verySmallTextSize text-black bg-darkgrey">
-			<div id="date" class="col text-left">
-				&nbsp;
+		<div class="verySmallTextSize text-black text-right" style="margin-top: 1rem">
+			<span id="date">&nbsp;</span>,<span id="time">&nbsp;</span>
+		</div>
+		<div class="text-center">
+			<h1>Dashboard</h1>
+		</div>
+
+
+		<div class="wrapper">
+			<div class="card border-warning">
+				<div class="card-header bg-warning">
+					Speicher (5 W)
+					<i class="fas fa-plus-square pull-right"></i>
+					<p class="text-danger">
+						Keine Verbindung zum SoC-Modul
+					</p>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col">
+								Ladung
+							</div>
+							<div class="col text-right">
+								10 kWh
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col">
+								Entnahme
+							</div>
+							<div class="col text-right">
+								5 kWh
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col">
+								SoC
+							</div>
+							<div class="col text-right">
+								44 %
+							</div>
+						</div>
+						<!--<div class="form-row">
+							<div class=col-auto>
+								<label for="batVorrang" class="col-form-label">Vorrang</label>
+								<button class="btn btn-light batVorrangBtn" role="button"> <i class="fas fa-xs fa-pen"></i> </button>
+							</div>
+							<div class="col-auto ml-auto" id=batVorrangStr>
+								PV
+							</div>
+							<div class="col-auto ml-auto hide" id="batVorrang">
+								<select name="vorrang" class="form-control">
+									<option>Speicher</option>
+									<option >PV</option>
+								</select>
+							</div>
+						</div>-->
+					</div>
+				</div>
 			</div>
-			<div class="col-5 text-center">
-				<button type="button" class="btn btn-sm btn-secondary cursor-pointer regularTextSize" id="chargeModeSelectBtn">
-					<span id="chargeModeSelectBtnText">Lademodus</span>
-					<span id="priorityEvBattery">
-						<span class="fas fa-car" id="priorityEvBatteryIcon">&nbsp;</span>
-					</span>
-				</button>
+
+			<script>
+				$(".batVorrangBtn").click(function(){
+		console.log('btn clicked');
+					$("#batVorrangStr").toggle();
+					$("#batVorrang").toggle();
+				});
+			</script>
+
+			<div class="card border-success">
+				<div class="card-header bg-success" id="headerPV">
+					PV (50 W)
+					<i class="fas fa-plus-square pull-right"></i>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<div class="col">
+								Energie 
+							</div>
+							<div class="col text-right">
+								2 kWh
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="time" class="col text-right">
-				&nbsp;
+
+
+			<div class="card border-danger">
+				<div class="card-header bg-danger">
+					Netz (600 W)
+					<i class="fas fa-plus-square pull-right"></i>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<div class="col">
+								Import
+							</div>
+							<div class="col text-right">
+								2 kWh
+							</div>
+						</div>
+						<div class="form-row mb-1">
+							<div class="col">
+								Export
+							</div>
+							<div class="col text-right">
+								6 kWh
+							</div>
+						</div>
+						<div class="form-row mb-1">
+							<div class="col">
+								Strompreis
+							</div>
+							<div class="col text-right">
+								40 ct/kWh
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card border-light">
+				<div class="card-header bg-secondary">
+					Hausverbrauch  (500 W)
+					<i class="fas fa-minus-square pull-right"></i>
+				</div>
+				<!--<div class="card-body ">
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<div class="col">
+								Leistung
+							</div>
+							<div class="col text-right">
+								500 W
+							</div>
+						</div>
+						<div class="form-row mb-1">
+							<div class="col">
+								Energie 
+							</div>
+							<div class="col text-right">
+								20 kWh
+							</div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+
+			<div class="card border-primary">
+				<div class="card-header bg-primary">
+					Gesamtleistung (300W)
+					<i class="fas fa-plus-square pull-right"></i>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<div class="col">
+								Energie
+							</div>
+							<div class="col text-right">
+								10 kWh
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="row justify-content-center regularTextSize font-weight-bold text-center text-black">
-			<div class="col-sm bg-lightgreen">
-				<span class="smallTextSize">PV: <span id="pvleistung">lade Daten</span></span><span class="verySmallTextSize" id="pvdailyyield"></span>
-			</div>
-			<div id="evudiv" class="col-sm bg-rose">
-				<span class="smallTextSize">Netz<span id="bezug">: lade Daten</span></span><span class="verySmallTextSize" id="evuidailyyield"></span><span class="verySmallTextSize" id="evuedailyyield"></span>
-			</div>
-		</div>
-
-		<div class="row justify-content-center regularTextSize font-weight-bold text-center text-black">
-			<div class="col-sm bg-apricot">
-				<span class="smallTextSize">Hausverbrauch: <span id="hausverbrauch">lade Daten</span></span><span class="verySmallTextSize" id="hausverbrauchdailyyield"></span>
-			</div>
-			<div class="col-sm bg-lightgrey">
-				<span class="smallTextSize">Ladeleistung: <span id="powerAllLp">lade Daten</span></span><span class="verySmallTextSize" id="lladailyyield"></span>
-			</div>
-		</div>
-		<div id="speicher" class="row justify-content-center regularTextSize font-weight-bold text-center text-black">
-			<div class="col-sm bg-orange">
-				<span class="smallTextSize">Speicher<span id="speicherleistung">: lade Daten</span></span><span class="verySmallTextSize" id="siidailyyield"></span><span class="verySmallTextSize" id="siedailyyield"></span> <span class="smallTextSize">- Ladestand: <span id="speichersoc"> lade Daten</span></span>
-			</div>
-		</div>
-		<div id="strompreis" class="row justify-content-center regularTextSize font-weight-bold text-center text-black">
-			<div class="col-sm bg-rose">
-				<span class="smallTextSize">aktueller Strompreis: <span id="aktuellerStrompreis"> lade Daten</span></span>
-			</div>
-		</div>
 		<div id="verbraucher" class="row justify-content-center regularTextSize font-weight-bold text-center openwb-devices hide">
 			<div id="verbraucher1" class="col-sm hide">
 				<span class="smallTextSize"><span id="verbraucher1name">Verbraucher 1</span>: <span id="verbraucher1leistung">lade Daten</span></span><span class="verySmallTextSize" id="verbraucher1dailyyield"></span>
@@ -237,68 +377,236 @@
 		</div>
 
 		<!-- chargepoint info header -->
-		<div class="row no-gutter py-1 py-md-0 smallTextSize text-center bg-darkgrey text-grey font-weight-bold">
-			<div class="col-3 px-0">
-				Ladepunkt <span id="etproviderEnabledIcon" class="fa fa-chart-line hide"></span>
-			</div>
-			<div class="col-3 px-0">
-				Ladeparameter
-			</div>
-			<div class="col-4 px-0">
-				geladen
-			</div>
-			<div class="col-2 px-0">
-				SoC
+		<div class="card text-grey smallTextSize">
+			<div class="card-header text-center bg-darkgrey font-weight-bold">
+				<div class="form-group">
+					<div class="form-row">
+						<div class="col-3">
+							Ladepunkt <span id="etproviderEnabledIcon" class="fa fa-chart-line hide"></span>
+						</div>
+						<div class="col-3">
+							Lademodus
+						</div>
+						<div class="col-3">
+							Ladeparameter
+						</div>
+						<div class="col-3">
+							geladen
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-3">
+							
+						</div>
+						<div class="col-3">
+							Fahrzeug
+						</div>
+						<div class="col-3">
+							SoC
+						</div>
+						<div class="col-3">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- chargepoint info data lp1-->
-		<div class="row no-gutter py-1 py-md-0 smallTextSize text-center bg-lightgrey text-grey" data-lp="1">
-			<div class="col-3 px-0">
-				<span class="fas fa-xs hide autolockConfiguredLp"></span>
-				<span class="cursor-pointer font-weight-bold lpDisabledStyle enableLp nameLp">LP Name</span>
-				<span class="fa fa-xs fa-plug text-orange hide plugstatLp"></span>
-				<span class="fa fa-xs fa-flag-checkered hide targetChargingLp"></span>
-				<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
+		<div id="cpCard" class="cpCard">
+		<div class="card border-lightgrey text-grey smallTextSize" lp="1">
+			<div class="card-header bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP1">
+				<div class="form-row">
+					<div class="col-3">
+						<span class="fas fa-xs hide autolockConfiguredLp"></span>
+						<span class="cursor-pointer font-weight-bold lpDisabledStyle enableLp nameLp">LP Name</span>
+						<span class="fa fa-xs fa-plug text-orange hide plugstatLp"></span>
+						<span class="fa fa-xs fa-flag-checkered hide targetChargingLp"></span>
+						<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
+					</div>
+					<div class="col-3">
+						<span>Min+PV</span>
+					</div>
+					<div class="col-3">
+						<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
+					</div>
+					<div class="col-3">
+						<span  class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span> 
+						<i class="fas fa-plus-square pull-right"></i>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-3">
+						<p class="text-danger">
+							Keine Verbindung zum SoC-Modul
+						</p>
+					</div>
+					<div class="col-3">
+						<span>Serviceauto 1</span>
+					</div>
+					<div class="col-3">
+						<span class="socLp"></span> %
+						<i class="small reloadLpSoc fas fa-redo-alt"></i>
+						<i class="manualSocSymbol fas fa-edit hide"></i>
+					</div>
+				</div>
 			</div>
-			<div class="col-3 px-0">
-				<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
-			</div>
-			<div class="col-4 px-0">
-				<span class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span>
-			</div>
-			<div class="col-2 px-0 socNotConfiguredLp text-center">
-				--
-			</div>
-			<div class="col-2 px-0 hide socConfiguredLp text-center cursor-pointer">
-				<span class="socLp"></span> %
-				<i class="small reloadLpSoc fas fa-redo-alt"></i>
-				<i class="manualSocSymbol fas fa-edit hide"></i>
+			<div  id="collapseLP1" class="card-body collapse">
+				<div class="form-group">
+					<div class="form-row mb-1">
+						<p class="center">Keine Ladung, da Ladepunkt gesperrt.</p>
+					</div>
+					<div class="form-row mb-1">
+						<div class="col-6">Ladepunkt gesperrt</div>
+						<div class="col-6">
+							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOff" value="0">Nein
+								</label>
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOn" value="1" checked="checked">Ja
+								</label>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-row mb-1">
+						<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
+						<div class="col-6">
+							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+								<option>Sofortladen</option>
+								<option >PV</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+				<h3>Einstellungen für den Lademodus</h3>
+				<div class="form-group mb-0">
+					<div class="form-row vaRow mb-0">
+						<div class="col-6">Minimal Stromstärke</div>
+						<div class="col-6">
+							<form id="minundpvladenEinstellungen"></form>
+							<div class="form-row form-group mb-1 vaRow" data-lp="1">
+								<label for="minCurrentMinPv" class="col-form-label text-right"></label>
+								<div class="col">
+									<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+								</div>
+								<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<div class="form-row mb-1">
+						<label for="ssdisplay" class="col-6 col-form-label">EV</label>
+						<div class="col-6">
+							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+								<option>Serviceauto 1</option>
+								<option>Serviceauto 2</option>
+							</select>
+						</div>
+					</div>
 			</div>
 		</div>
+	</div>
+	
 
 		<!-- chargepoint info data lp2-->
-		<div class="row no-gutter py-1 py-md-0 smallTextSize text-center bg-lightgrey text-grey" data-lp="2">
-			<div class="col-3 px-0">
-				<span class="fas fa-xs hide autolockConfiguredLp"></span>
-				<span class="cursor-pointer font-weight-bold lpDisabledStyle enableLp nameLp">LP Name</span>
-				<span class="fa fa-xs fa-plug text-orange hide plugstatLp"></span>
-				<span class="fa fa-xs fa-flag-checkered hide targetChargingLp"></span>
-				<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
-			</div>
-			<div class="col-3 px-0">
-				<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
-			</div>
-			<div class="col-4 px-0">
-				<span class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span>
-			</div>
-			<div class="col-2 px-0 socNotConfiguredLp text-center">
-				--
-			</div>
-			<div class="col-2 px-0 hide socConfiguredLp text-center cursor-pointer">
-				<span class="socLp"></span> %
-				<i class="small reloadLpSoc fas fa-redo-alt"></i>
-				<i class="manualSocSymbol fas fa-edit hide"></i>
+		<div id="cpCard" class="cpCard">
+			<div class="card border-lightgrey text-grey smallTextSize" data-lp="1">
+				<div class="card-header bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP2">
+					<div class="form-row">
+						<div class="col-sm">
+							<span class="fas fa-xs hide autolockConfiguredLp"></span>
+							<span class="cursor-pointer font-weight-bold lpDisabledStyle enableLp nameLp">LP Name</span>
+							<span class="fa fa-xs fa-plug text-orange plugstatLp"></span>
+							<span class="fa fa-xs fa-flag-checkered hide targetChargingLp"></span>
+							<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
+						</div>
+						<div class="col-3">
+							<span>Min+PV</span>
+						</div>
+						<div class="col-3">
+							<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
+						</div>
+						<div class="col-3">
+							<span  class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span> 
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-3">
+						</div>
+						<div class="col-3">
+							<span>Serviceauto 1</span>
+						</div>
+						<div class="col-3">
+							<span class="socLp"></span> %
+							<i class="small reloadLpSoc fas fa-redo-alt"></i>
+							<i class="manualSocSymbol fas fa-edit hide"></i>
+						</div>
+						<div class="col-3">
+							
+						</div>
+					</div>
+				</div>
+				<div  id="collapseLP2" class="card-body collapse">
+					<div class="form-row">
+						<div class="col-6">Ladung stoppen</div>
+						<div class="col-6">
+							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOff" value="0">Nein
+								</label>
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOn" value="1" checked="checked">Ja
+								</label>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
+							<div class="col-6">
+								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+									<option>Sofortladen</option>
+									<option >PV</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				
+					<h3>Einstellungen für den Lademodus</h3>
+					<div class="form-group mb-0">
+						<div class="form-row vaRow mb-0">
+							<div class="col-6">Minimal Stromstärke</div>
+							<div class="col-6">
+								<form id="minundpvladenEinstellungen"></form>
+								<div class="form-row form-group mb-1 vaRow smallTextSize" data-lp="1">
+									<label for="minCurrentMinPv" class="col-form-label text-right"></label>
+									<div class="col">
+										<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+									</div>
+									<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">12 A</label>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<label for="ssdisplay" class="col-6 col-form-label">EV</label>
+							<div class="col-6">
+								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+									<option>Serviceauto 1</option>
+									<option>Serviceauto 2</option>
+								</select>
+							</div>
+						</div>
+				</div>
 			</div>
 		</div>
 

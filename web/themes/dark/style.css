@@ -170,69 +170,69 @@ body > .container {
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query since this is the default in Bootstrap */
 h1 {
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 }
 
 h2 {
-	font-size: 0.9rem;
+	font-size: 1.2rem;
 }
 
 h3 {
-	font-size: 0.7rem;
+	font-size: 0.9rem;
 }
 
 .verySmallTextSize {
-	font-size: 0.5rem;
+	font-size: 0.6rem;
 }
 
 .smallTextSize {
-	font-size: 0.5rem;
+	font-size: 1.2rem;
 }
 
 .regularTextSize {
-	font-size: 0.7rem;
-}
-
-.largeTextSize {
 	font-size: 0.8rem;
 }
 
+.largeTextSize {
+	font-size: 1.1rem;
+}
+
 .buttonTextSize {
-	font-size: 0.9rem;
+	font-size: 1.0rem;
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media screen and (min-width: 576px) {
 	h1 {
-		font-size: 1.7rem;
+		font-size: 1.9rem;
 	}
 
 	h2 {
-		font-size: 1.1rem;
+		font-size: 1.3rem;
 	}
 
 	h3 {
-		font-size: 0.9rem;
+		font-size: 1.0rem;
 	}
 
 	.verySmallTextSize {
-		font-size: 0.6rem;
+		font-size: 0.7rem;
 	}
 
 	.smallTextSize {
-		font-size: 0.68rem;
+		font-size: 1.2rem;
 	}
 
 	.regularTextSize {
-		font-size: 0.75rem;
+		font-size: 0.9rem;
 	}
 
 	.largeTextSize {
-		font-size: 0.95rem;
+		font-size: 1.2rem;
 	}
 
 	.buttonTextSize {
-		font-size: 1.0rem;
+		font-size: 1.1rem;
 	}
 }
 
@@ -255,7 +255,7 @@ h3 {
 	}
 
 	.smallTextSize {
-		font-size: 0.9rem;
+		font-size: 1.2rem;
 	}
 
 	.regularTextSize {
