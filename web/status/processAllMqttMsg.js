@@ -164,6 +164,12 @@ function processPvMsg (mqttmsg, mqttpayload) {
 		case "openWB/pv/1/faultStr":
 			textShow(mqttpayload, '#faultStrPv');
 			break;
+		case "openWB/pv/1/faultState":
+			setWarningLevel(mqttpayload, '#faultStrPvRow');
+			break;
+		case "openWB/pv/1/faultStr":
+			textShow(mqttpayload, '#faultStrPv');
+			break;
 	}
 }
 
@@ -245,6 +251,18 @@ function processLpMsg (mqttmsg, mqttpayload) {
 	}
 	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/W$/i ) ) {
 		directShow(mqttpayload, '#lp' + index + ' .ladeleistung');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultState$/i ) ) {
+		setWarningLevel(mqttpayload, '#lp' + index + ' .faultStrLpRow');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultStr$/i ) ) {
+		textShow(mqttpayload, '#lp' + index + ' .faultStrLp');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/socFaultState$/i ) ) {
+		setWarningLevel(mqttpayload, '#lp' + index + ' .faultStrSocLpRow');
+	}
+	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/socFaultStr$/i ) ) {
+		textShow(mqttpayload, '#lp' + index + ' .faultStrSocLp');
 	}
 	else if ( mqttmsg.match( /^openwb\/lp\/[1-9][0-9]*\/faultState$/i ) ) {
 		setWarningLevel(mqttpayload, '#lp' + index + ' .faultStrLpRow');
