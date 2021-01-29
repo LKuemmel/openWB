@@ -16,7 +16,7 @@ body {
 	background: white;
 }
 body > .container {
-	padding: 55px 15px 0;
+	padding: 55px 0 0;
 }
 
 @keyframes alertPulsation {
@@ -158,6 +158,42 @@ body > .container {
 	background-color:#fcbe1e;
 }
 
+.card {
+    margin-bottom: 0.25rem;
+}
+
+.card .card-header {
+    font-weight: bold;
+}
+
+.bg-primary,
+.bg-secondary,
+.bg-danger,
+.bg-success {
+    color: white;
+}
+
+.bg-warning,
+.bg-info {
+    color: #212529;
+}
+
+.card-header.bg-secondary .btn-outline-info:not(.active):not(:hover),
+.card-header.bg-success .btn-outline-info:not(.active):not(:hover),
+.card-header.bg-primary .btn-outline-info:not(.active):not(:hover) {
+    background-color: white;
+}
+
+.card-header.bg-success .btn-outline-info.focus {
+    box-shadow: 0 0 0 0.2rem white;
+}
+
+.card-header.bg-success .btn-outline-info.active,
+.card-header.bg-success .btn-outline-info:hover {
+    border-color: white;
+}
+
+
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query since this is the default in Bootstrap */
 h1 {
@@ -190,6 +226,12 @@ h3 {
 
 .buttonTextSize {
 	font-size: 0.9rem;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 10px;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -225,20 +267,26 @@ h3 {
 	.buttonTextSize {
 		font-size: 1.0rem;
 	}
+
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		gap: 10px;
+}
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media screen and (min-width: 768px) {
 	h1 {
-		font-size: 2.0rem;
-	}
-
-	h2 {
 		font-size: 1.4rem;
 	}
 
+	h2 {
+		font-size: 1.2rem;
+	}
+
 	h3 {
-		font-size: 1.1rem;
+		font-size: 1.0rem;
 	}
 
 	.verySmallTextSize {
@@ -254,26 +302,32 @@ h3 {
 	}
 
 	.largeTextSize {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 
 	.buttonTextSize {
-		font-size: 1.2rem;
+		font-size: 1.0rem;
 	}
+
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 10px;
+}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media screen and (min-width: 992px) {
 	h1 {
-		font-size: 2.6rem;
+		font-size: 1.9rem;
 	}
 
 	h2 {
-		font-size: 2.0rem;
+		font-size: 1.7rem;
 	}
 
 	h3 {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 	}
 
 	.verySmallTextSize {
@@ -295,20 +349,26 @@ h3 {
 	.buttonTextSize {
 		font-size: 1.6rem;
 	}
+
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 10px;
+	}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 	h1 {
-		font-size: 3rem;
+		font-size: 2.2rem;
 	}
 
 	h2 {
-		font-size: 2.4rem;
+		font-size: 2.0rem;
 	}
 
 	h3 {
-		font-size: 1.95rem;
+		font-size: 1.85rem;
 	}
 
 	.verySmallTextSize {
@@ -329,6 +389,12 @@ h3 {
 
 	.buttonTextSize {
 		font-size: 2.0rem;
+	}
+
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 10px;
 	}
 }
 

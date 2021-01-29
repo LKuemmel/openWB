@@ -74,13 +74,13 @@
 			height: 150px;
 		}
 
-		.cpCard .card-header .collPlus {
+		.cpCard .card-header .collPlus:after {
 			font-family: 'Font Awesome 5 Free';
 			font-weight: 900;
 			content: "\f146";
-			float: left; 
+			float: right; 
 		}
-		.cpCard .card-header.collapsed .collPlus {
+		.cpCard .card-header.collapsed .collPlus:after {
 			/* symbol for "collapsed" panels */
 			content: "\f0fe"; 
 		}
@@ -152,7 +152,7 @@
 			<div class="card border-warning">
 				<div class="card-header bg-warning">
 					Speicher (5 W)
-					<i class="fas fa-plus-square pull-right"></i>
+					<i class="fas fa-minus-square pull-right"></i>
 					<p class="text-danger">
 						Keine Verbindung zum SoC-Modul
 					</p>
@@ -213,7 +213,7 @@
 			<div class="card border-success">
 				<div class="card-header bg-success" id="headerPV">
 					PV (50 W)
-					<i class="fas fa-plus-square pull-right"></i>
+					<i class="fas fa-minus-square pull-right"></i>
 				</div>
 				<div class="card-body">
 					<div class="form-group">
@@ -230,12 +230,12 @@
 			</div>
 
 
-			<div class="card border-danger">
+			<div class="card border-light">
 				<div class="card-header bg-danger">
 					Netz (600 W)
 					<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<div class="card-body">
+				<!--<div class="card-body">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -262,13 +262,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 			<div class="card border-light">
 				<div class="card-header bg-secondary">
 					Hausverbrauch  (500 W)
-					<i class="fas fa-minus-square pull-right"></i>
+					<i class="fas fa-plus-square pull-right"></i>
 				</div>
 				<!--<div class="card-body ">
 					<div class="form-group">
@@ -292,12 +292,12 @@
 				</div>-->
 			</div>
 
-			<div class="card border-primary">
+			<div class="card border-light">
 				<div class="card-header bg-primary">
 					Gesamtleistung (300W)
 					<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<div class="card-body">
+				<!--<div class="card-body">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -308,7 +308,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 
@@ -414,7 +414,7 @@
 		<!-- chargepoint info data lp1-->
 		<div id="cpCard" class="cpCard">
 		<div class="card border-lightgrey text-grey smallTextSize" lp="1">
-			<div class="card-header bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP1">
+			<div class="card-header text-center bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP1">
 				<div class="form-row">
 					<div class="col-3">
 						<span class="fas fa-xs hide autolockConfiguredLp"></span>
@@ -424,15 +424,18 @@
 						<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
 					</div>
 					<div class="col-3">
-						<span>Min+PV</span>
+						<span>Sofortladen</span>
 					</div>
 					<div class="col-3">
 						<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
 					</div>
-					<div class="col-3">
+					<div class="col-2">
 						<span  class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span> 
-						<i class="fas fa-plus-square pull-right"></i>
 					</div>
+					<div class="col-1">
+						<div class="collPlus"></div>
+					</div>
+					
 				</div>
 				<div class="form-row">
 					<div class="col-3">
@@ -441,7 +444,7 @@
 						</p>
 					</div>
 					<div class="col-3">
-						<span>Serviceauto 1</span>
+						<span>EV 1</span>
 					</div>
 					<div class="col-3">
 						<span class="socLp"></span> %
@@ -468,7 +471,6 @@
 							</div>
 						</div>
 					</div>
-					<hr>
 					<div class="form-row mb-1">
 						<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
 						<div class="col-6">
@@ -479,6 +481,7 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				
 				<h3>Einstellungen für den Lademodus</h3>
 				<div class="form-group mb-0">
@@ -486,28 +489,56 @@
 						<div class="col-6">Minimal Stromstärke</div>
 						<div class="col-6">
 							<form id="minundpvladenEinstellungen"></form>
-							<div class="form-row form-group mb-1 vaRow" data-lp="1">
-								<label for="minCurrentMinPv" class="col-form-label text-right"></label>
-								<div class="col">
-									<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+								<div class="form-row form-group mb-1 vaRow" data-lp="1">
+									<label for="minCurrentMinPv" class="col-form-label text-right"></label>
+									<div class="col">
+										<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+									</div>
+									<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
 								</div>
-								<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
-							</div>
-						</form>
+							</form>
+						</div>
+					</div>
+					<div class="form-row vaRow">
+						<div class="col-4">
+							<label class="col-form-label">Begrenzung</label>
+						</div>
+						<div class="col btn-group btn-group-toggle" id="lp/1/chargeLimitation" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
+							<label class="btn btn-lg btn-outline-info btn-toggle regularTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="0"> keine
+							</label>
+							<label class="socConfiguredLp btn btn-lg btn-outline-info btn-toggle regularTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="2"> EV-SoC
+							</label>
+							<label class="btn btn-lg btn-outline-info btn-toggle regularTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="1"> Energiemenge
+							</label>
 						</div>
 					</div>
 				</div>
 				<hr>
-				<div class="form-group">
-					<div class="form-row mb-1">
-						<label for="ssdisplay" class="col-6 col-form-label">EV</label>
-						<div class="col-6">
-							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-								<option>Serviceauto 1</option>
-								<option>Serviceauto 2</option>
-							</select>
+				<div class="form-row mb-1">
+					<label for="ssdisplay" class="col-6 col-form-label">EV</label>
+					<div class="col-6">
+						<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+							<option>EV 1</option>
+							<option>EV 2</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row mb-1">
+					<div class="col-6">Priorität</div>
+					<div class="col-6">
+						<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+							<label class="btn btn-sm btn-outline-info smallTextSize">
+								<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+							</label>
+							<label class="btn btn-sm btn-outline-info smallTextSize">
+								<input type="radio" name="isss" id="isssOn" value="1">Ja
+							</label>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -515,45 +546,71 @@
 
 		<!-- chargepoint info data lp2-->
 		<div id="cpCard" class="cpCard">
-			<div class="card border-lightgrey text-grey smallTextSize" data-lp="1">
-				<div class="card-header bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP2">
+			<div class="card border-lightgrey text-grey smallTextSize" lp="2">
+				<div class="card-header text-center bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP2">
 					<div class="form-row">
-						<div class="col-sm">
+						<div class="col-3">
 							<span class="fas fa-xs hide autolockConfiguredLp"></span>
 							<span class="cursor-pointer font-weight-bold lpDisabledStyle enableLp nameLp">LP Name</span>
-							<span class="fa fa-xs fa-plug text-orange plugstatLp"></span>
+							<span class="fa fa-xs fa-plug text-orange hide plugstatLp"></span>
 							<span class="fa fa-xs fa-flag-checkered hide targetChargingLp"></span>
 							<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
 						</div>
 						<div class="col-3">
-							<span>Min+PV</span>
+							<span>PV</span>
 						</div>
 						<div class="col-3">
 							<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
 						</div>
-						<div class="col-3">
+						<div class="col-2">
 							<span  class="energyChargedLp">lade Daten</span><span class="kmChargedLp" data-consumption="0"></span> 
+						</div>
+						<div class="col-1">
+							<div class="collPlus"></div>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="col-3">
 						</div>
 						<div class="col-3">
-							<span>Serviceauto 1</span>
+							<span>EV 2</span>
 						</div>
 						<div class="col-3">
 							<span class="socLp"></span> %
 							<i class="small reloadLpSoc fas fa-redo-alt"></i>
 							<i class="manualSocSymbol fas fa-edit hide"></i>
 						</div>
-						<div class="col-3">
-							
-						</div>
 					</div>
 				</div>
 				<div  id="collapseLP2" class="card-body collapse">
-					<div class="form-row">
-						<div class="col-6">Ladung stoppen</div>
+					<div class="form-group">
+						<div class="form-row mb-1">
+							<div class="col-6">Ladepunkt gesperrt</div>
+							<div class="col-6">
+								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+									</label>
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOn" value="1">Ja
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-row mb-1">
+							<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
+							<div class="col-6">
+								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+									<option >PV</option>
+									<option>Sofortladen</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<h3>Einstellungen für den Lademodus</h3>
+					<div class="form-row mb-1">
+						<div class="col-6">Auch ohne PV-Strom laden</div>
 						<div class="col-6">
 							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
 								<label class="btn btn-sm btn-outline-info smallTextSize">
@@ -565,47 +622,71 @@
 							</div>
 						</div>
 					</div>
-					<hr>
-					<div class="form-group">
-						<div class="form-row mb-1">
-							<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
-							<div class="col-6">
-								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-									<option>Sofortladen</option>
-									<option >PV</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				
-					<h3>Einstellungen für den Lademodus</h3>
 					<div class="form-group mb-0">
 						<div class="form-row vaRow mb-0">
 							<div class="col-6">Minimal Stromstärke</div>
 							<div class="col-6">
 								<form id="minundpvladenEinstellungen"></form>
-								<div class="form-row form-group mb-1 vaRow smallTextSize" data-lp="1">
+								<div class="form-row form-group mb-1 vaRow" data-lp="1">
 									<label for="minCurrentMinPv" class="col-form-label text-right"></label>
 									<div class="col">
 										<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
 									</div>
-									<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">12 A</label>
+									<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
 								</div>
 							</form>
 							</div>
 						</div>
-					</div>
-					<hr>
-					<div class="form-group">
 						<div class="form-row mb-1">
-							<label for="ssdisplay" class="col-6 col-form-label">EV</label>
+							<div class="col-6">Erst ab Abschaltungs-PV-Ertrag laden</div>
 							<div class="col-6">
-								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-									<option>Serviceauto 1</option>
-									<option>Serviceauto 2</option>
-								</select>
+								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+									</label>
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOn" value="1">Ja
+									</label>
+								</div>
 							</div>
 						</div>
+						<div class="form-row mb-1">
+							<div class="col-6">Speicher-Vorrang</div>
+							<div class="col-6">
+								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+									</label>
+									<label class="btn btn-sm btn-outline-info smallTextSize">
+										<input type="radio" name="isss" id="isssOn" value="1">Ja
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-row mb-1">
+						<label for="ssdisplay" class="col-6 col-form-label">EV</label>
+						<div class="col-6">
+							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
+								<option>EV 1</option>
+								<option>EV 2</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row mb-1">
+						<div class="col-6">Priorität</div>
+						<div class="col-6">
+							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+								</label>
+								<label class="btn btn-sm btn-outline-info smallTextSize">
+									<input type="radio" name="isss" id="isssOn" value="1">Ja
+								</label>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
