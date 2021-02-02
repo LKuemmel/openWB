@@ -140,24 +140,22 @@
 	<!-- Landing Page -->
 	<div id="nav-placeholder"></div>
 	<div class="container">
-		<div class="verySmallTextSize text-black text-right" style="margin-top: 1rem">
-			<span id="date">&nbsp;</span>,<span id="time">&nbsp;</span>
-		</div>
-		<div class="text-center">
+		<div class="text-center d-none d-sm-block">
 			<h1>Dashboard</h1>
 		</div>
 
-
-		<div class="wrapper">
+		<div class="row no-gutters">
+			<div class="col-sm">
 			<div class="card border-warning">
-				<div class="card-header bg-warning">
-					Speicher (5 W)
-					<i class="fas fa-minus-square pull-right"></i>
-					<p class="text-danger">
+					<div class="card-header bg-warning collapsed" data-toggle="collapse" data-target="#cardBat">
+						<i class="fas fa-car-battery"></i>
+						5 W
+						<i class="fas fa-plus-square pull-right"></i>
+						<!--<<p class="text-danger">
 						Keine Verbindung zum SoC-Modul
-					</p>
+						</p>-->
 				</div>
-				<div class="card-body">
+					<div id="cardBat" class="card-body collapse">
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col">
@@ -183,24 +181,10 @@
 								44 %
 							</div>
 						</div>
-						<!--<div class="form-row">
-							<div class=col-auto>
-								<label for="batVorrang" class="col-form-label">Vorrang</label>
-								<button class="btn btn-light batVorrangBtn" role="button"> <i class="fas fa-xs fa-pen"></i> </button>
 							</div>
-							<div class="col-auto ml-auto" id=batVorrangStr>
-								PV
 							</div>
-							<div class="col-auto ml-auto hide" id="batVorrang">
-								<select name="vorrang" class="form-control">
-									<option>Speicher</option>
-									<option >PV</option>
-								</select>
 							</div>
-						</div>-->
 					</div>
-				</div>
-			</div>
 
 			<script>
 				$(".batVorrangBtn").click(function(){
@@ -210,12 +194,14 @@
 				});
 			</script>
 
+			<div class="col-sm">
 			<div class="card border-success">
-				<div class="card-header bg-success" id="headerPV">
-					PV (50 W)
-					<i class="fas fa-minus-square pull-right"></i>
+					<div class="card-header bg-success collapsed" data-toggle="collapse" data-target="#cardPV">
+						<i class="fas fa-solar-panel"></i>
+						50 W
+						<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<div class="card-body">
+					<div id="cardPV" class="card-body collapse">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -228,14 +214,18 @@
 					</div>
 				</div>
 			</div>
+			</div>
 
-
-			<div class="card border-light">
-				<div class="card-header bg-danger">
-					Netz (600 W)
+			<div class="col-sm">
+				<div class="card border-danger">
+					<div class="card-header bg-danger collapsed" data-toggle="collapse" data-target="#cardNet">
+						<i class="fas fa-home"></i>
+						<i class="fas fa-long-arrow-alt-right"></i>
+						<img src="img/icons/electric-tower.svg" width="20vw" >
+						600 W
 					<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<!--<div class="card-body">
+					<div id="cardNet" class="card-body collapse">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -262,15 +252,18 @@
 							</div>
 						</div>
 					</div>
-				</div>-->
+			</div>
+				</div>
 			</div>
 
-			<div class="card border-light">
-				<div class="card-header bg-secondary">
-					Hausverbrauch  (500 W)
+			<div class="col-sm">
+				<div class="card border-secondary">
+					<div class="card-header bg-secondary collapsed" data-toggle="collapse" data-target="#cardHome">
+						<i class="fas fa-home"></i>
+						500 W
 					<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<!--<div class="card-body ">
+					<div id="cardHome" class="card-body collapse">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -289,15 +282,18 @@
 							</div>
 						</div>
 					</div>
-				</div>-->
+			</div>
+				</div>
 			</div>
 
-			<div class="card border-light">
-				<div class="card-header bg-primary">
-					Gesamtleistung (300W)
+			<div class="col-sm">
+				<div class="card border-primary">
+					<div class="card-header bg-primary collapsed" data-toggle="collapse" data-target="#cardCp">
+						<i class="fas fa-charging-station"></i>
+						300W
 					<i class="fas fa-plus-square pull-right"></i>
 				</div>
-				<!--<div class="card-body">
+					<div id="cardCp" class="card-body collapse">
 					<div class="form-group">
 						<div class="form-row mb-1">
 							<div class="col">
@@ -308,7 +304,8 @@
 							</div>
 						</div>
 					</div>
-				</div>-->
+			</div>
+		</div>
 			</div>
 		</div>
 
@@ -377,7 +374,7 @@
 		</div>
 
 		<!-- chargepoint info header -->
-		<div class="card text-grey smallTextSize">
+		<div class="card text-grey verySmallTextSize">
 			<div class="card-header text-center bg-darkgrey font-weight-bold">
 				<div class="form-group">
 					<div class="form-row">
@@ -413,8 +410,8 @@
 
 		<!-- chargepoint info data lp1-->
 		<div id="cpCard" class="cpCard">
-		<div class="card border-lightgrey text-grey smallTextSize" lp="1">
-			<div class="card-header text-center bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP1">
+		<div class="card border-lightgrey text-grey" lp="1">
+			<div class="card-header text-center bg-lightgrey verySmallTextSize collapsed" data-toggle="collapse" data-target="#collapseLP1">
 				<div class="form-row">
 					<div class="col-3">
 						<span class="fas fa-xs hide autolockConfiguredLp"></span>
@@ -453,35 +450,71 @@
 					</div>
 				</div>
 			</div>
-			<div  id="collapseLP1" class="card-body collapse">
+			<div  id="collapseLP1" class="card-body smallTextSize collapse">
 				<div class="form-group">
 					<div class="form-row mb-1">
 						<p class="center">Keine Ladung, da Ladepunkt gesperrt.</p>
 					</div>
 					<div class="form-row mb-1">
-						<div class="col-6">Ladepunkt gesperrt</div>
 						<div class="col-6">
-							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-								<label class="btn btn-sm btn-outline-info smallTextSize">
-									<input type="radio" name="isss" id="isssOff" value="0">Nein
-								</label>
-								<label class="btn btn-sm btn-outline-info smallTextSize">
-									<input type="radio" name="isss" id="isssOn" value="1" checked="checked">Ja
-								</label>
+							<i class="fas fa-lock"></i>
+							Ladepunkt gesperrt
 							</div>
+						<div class="col-6 text-right">
+							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
 						</div>
 					</div>
+					<hr>
 					<div class="form-row mb-1">
-						<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
+						<label for="ssdisplay" class="col-6 col-form-label">
+							<i class="fas fa-car-side"></i>
+							EV
+						</label>
 						<div class="col-6">
 							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-								<option>Sofortladen</option>
-								<option >PV</option>
+								<option>EV 1</option>
+								<option>EV 2</option>
 							</select>
 						</div>
 					</div>
+					<div class="form-row mb-1">
+						<div class="col-6">
+							<i class="fas fa-star"></i>
+							Priorität
+						</div>
+						<div class="col-6 text-right">
+							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
+						</div>
+					</div>
+					<div class="form-row mb-1">
+						<div class="col-4">
+							<label class="col-form-label">Lademodus</label>
+						</div>
+						<div class="col btn-group btn-group-toggle" id="lp/1/chargeLimitation" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
+							<label class="btn btn-lg btn-outline-danger btn-toggle smallTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="0" > Sofortladen
+							</label>
+							<label class="btn btn-lg btn-outline-success btn-toggle smallTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="2" > PV
+							</label>
+							<label class="btn btn-lg btn-orange btn-toggle smallTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="1"> Zielladen
+							</label>
+							<label class="btn btn-lg btn-outline-dark btn-toggle smallTextSize">
+								<input type="radio" name="lp/1/chargeLimitation" data-option="3"> Stop
+							</label>
+						</div>
+					</div>
+					<div class="form-row mb-1">
+						<div class="col-6">
+							<i class="fas fa-temperature-high"></i>
+							Vorheizladen
+						</div>
+						<div class="col-6 text-right">
+							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
+						</div>
+					</div>
 				</div>
-				<hr>
 				
 				<h3>Einstellungen für den Lademodus</h3>
 				<div class="form-group mb-0">
@@ -503,38 +536,15 @@
 						<div class="col-4">
 							<label class="col-form-label">Begrenzung</label>
 						</div>
-						<div class="col btn-group btn-group-toggle" id="lp/1/chargeLimitation" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
-							<label class="btn btn-lg btn-outline-info btn-toggle regularTextSize">
-								<input type="radio" name="lp/1/chargeLimitation" data-option="0"> keine
+						<div class="col btn-group btn-group-toggle" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
+							<label class="btn btn-lg btn-outline-info btn-toggle smallTextSize">
+								<input type="radio"  data-option="0"> keine
 							</label>
-							<label class="socConfiguredLp btn btn-lg btn-outline-info btn-toggle regularTextSize">
-								<input type="radio" name="lp/1/chargeLimitation" data-option="2"> EV-SoC
+							<label class="socConfiguredLp btn btn-lg btn-outline-info btn-toggle smallTextSize">
+								<input type="radio" data-option="2"> EV-SoC
 							</label>
-							<label class="btn btn-lg btn-outline-info btn-toggle regularTextSize">
-								<input type="radio" name="lp/1/chargeLimitation" data-option="1"> Energiemenge
-							</label>
-						</div>
-					</div>
-				</div>
-				<hr>
-				<div class="form-row mb-1">
-					<label for="ssdisplay" class="col-6 col-form-label">EV</label>
-					<div class="col-6">
-						<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-							<option>EV 1</option>
-							<option>EV 2</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-row mb-1">
-					<div class="col-6">Priorität</div>
-					<div class="col-6">
-						<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-							<label class="btn btn-sm btn-outline-info smallTextSize">
-								<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
-							</label>
-							<label class="btn btn-sm btn-outline-info smallTextSize">
-								<input type="radio" name="isss" id="isssOn" value="1">Ja
+							<label class="btn btn-lg btn-outline-info btn-toggle smallTextSize">
+								<input type="radio"  data-option="1" checked="checked"> Energiemenge
 							</label>
 						</div>
 					</div>
@@ -588,10 +598,10 @@
 							<div class="col-6">Ladepunkt gesperrt</div>
 							<div class="col-6">
 								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
 									</label>
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOn" value="1">Ja
 									</label>
 								</div>
@@ -638,13 +648,13 @@
 							</div>
 						</div>
 						<div class="form-row mb-1">
-							<div class="col-6">Erst ab Abschaltungs-PV-Ertrag laden</div>
+							<div class="col-6">Laden ab Einspeisungsgrenze</div>
 							<div class="col-6">
 								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
 									</label>
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOn" value="1">Ja
 									</label>
 								</div>
@@ -654,10 +664,10 @@
 							<div class="col-6">Speicher-Vorrang</div>
 							<div class="col-6">
 								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
 									</label>
-									<label class="btn btn-sm btn-outline-info smallTextSize">
+									<label class="btn btn-sm btn-info smallTextSize">
 										<input type="radio" name="isss" id="isssOn" value="1">Ja
 									</label>
 								</div>
@@ -678,10 +688,10 @@
 						<div class="col-6">Priorität</div>
 						<div class="col-6">
 							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-								<label class="btn btn-sm btn-outline-info smallTextSize">
+								<label class="btn btn-sm btn-info smallTextSize">
 									<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
 								</label>
-								<label class="btn btn-sm btn-outline-info smallTextSize">
+								<label class="btn btn-sm btn-info smallTextSize">
 									<input type="radio" name="isss" id="isssOn" value="1">Ja
 								</label>
 							</div>
