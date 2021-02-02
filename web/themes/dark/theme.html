@@ -42,6 +42,8 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-4.4.1/bootstrap.min.css">
+	<!-- Bootstrap-Toggle -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap4-toggle/bootstrap4-toggle.min.css">
 	<!-- Normalize -->
 	<link rel="stylesheet" type="text/css" href="css/normalize-8.0.1.css">
 	<!-- Font Awesome, all styles -->
@@ -88,6 +90,7 @@
 	<!-- important scripts to be loaded -->
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/bootstrap-4.4.1/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap4-toggle/bootstrap4-toggle.min.js"></script>
 	<script>
 		function getCookie(cname) {
 			var name = cname + '=';
@@ -107,7 +110,6 @@
 		var themeCookie = getCookie('openWBTheme');
 		// include special Theme style
 		$('head').append('<link rel="stylesheet" href="themes/' + themeCookie + '/style.css?v=23122021">');
-		console.log('<link rel="stylesheet" href="themes/' + themeCookie + '/style.css?v=23122021">');
 	</script>
 </head>
 
@@ -456,12 +458,12 @@
 						<p class="center">Keine Ladung, da Ladepunkt gesperrt.</p>
 					</div>
 					<div class="form-row mb-1">
-						<div class="col-6">
+						<div class="col-9">
 							<i class="fas fa-lock"></i>
 							Ladepunkt gesperrt
 							</div>
-						<div class="col-6 text-right">
-							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
+						<div class="col-3 text-right">
+							<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
 						</div>
 					</div>
 					<hr>
@@ -478,13 +480,13 @@
 						</div>
 					</div>
 					<div class="form-row mb-1">
-						<div class="col-6">
+						<div class="col-9">
 							<i class="fas fa-star"></i>
 							Priorität
 						</div>
-						<div class="col-6 text-right">
-							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
-						</div>
+							<div class="col-3 text-right">
+								<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
+							</div>
 					</div>
 					<div class="form-row mb-1">
 						<div class="col-4">
@@ -506,12 +508,12 @@
 						</div>
 					</div>
 					<div class="form-row mb-1">
-						<div class="col-6">
+						<div class="col-9">
 							<i class="fas fa-temperature-high"></i>
 							Vorheizladen
 						</div>
-						<div class="col-6 text-right">
-							<input type="checkbox" checked data-toggle="toggle" data-onstyle="info">
+						<div class="col-3 text-right">
+							<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
 						</div>
 					</div>
 				</div>
@@ -556,8 +558,8 @@
 
 		<!-- chargepoint info data lp2-->
 		<div id="cpCard" class="cpCard">
-			<div class="card border-lightgrey text-grey smallTextSize" lp="2">
-				<div class="card-header text-center bg-lightgrey collapsed" data-toggle="collapse" data-target="#collapseLP2">
+			<div class="card border-lightgrey text-grey" lp="2">
+				<div class="card-header text-center bg-lightgrey verySmallTextSize collapsed" data-toggle="collapse" data-target="#collapseLP2">
 					<div class="form-row">
 						<div class="col-3">
 							<span class="fas fa-xs hide autolockConfiguredLp"></span>
@@ -567,7 +569,7 @@
 							<span class="fa fa-xs fa-moon hide nightChargingLp"></span>
 						</div>
 						<div class="col-3">
-							<span>PV</span>
+							<span>Sofortladen</span>
 						</div>
 						<div class="col-3">
 							<span class="actualPowerLp">lade Daten</span><span class="phasesInUseLp"></span><span class="targetCurrentLp"></span>
@@ -578,12 +580,16 @@
 						<div class="col-1">
 							<div class="collPlus"></div>
 						</div>
+						
 					</div>
 					<div class="form-row">
 						<div class="col-3">
+							<p class="text-danger">
+								Keine Verbindung zum SoC-Modul
+							</p>
 						</div>
 						<div class="col-3">
-							<span>EV 2</span>
+							<span>EV 1</span>
 						</div>
 						<div class="col-3">
 							<span class="socLp"></span> %
@@ -592,107 +598,101 @@
 						</div>
 					</div>
 				</div>
-				<div  id="collapseLP2" class="card-body collapse">
+				<div  id="collapseLP2" class="card-body smallTextSize collapse">
 					<div class="form-group">
 						<div class="form-row mb-1">
-							<div class="col-6">Ladepunkt gesperrt</div>
-							<div class="col-6">
-								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
-									</label>
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOn" value="1">Ja
-									</label>
-								</div>
-							</div>
+							<p class="center">Keine Ladung, da Ladepunkt gesperrt.</p>
 						</div>
 						<div class="form-row mb-1">
-							<label for="ssdisplay" class="col-6 col-form-label">Lademodus</label>
+							<div class="col-9">
+								<i class="fas fa-lock"></i>
+								Ladepunkt gesperrt
+								</div>
+							<div class="col-3 text-right">
+								<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
+							</div>
+						</div>
+						<hr>
+						<div class="form-row mb-1">
+							<label for="ssdisplay" class="col-6 col-form-label">
+								<i class="fas fa-car-side"></i>
+								EV
+							</label>
 							<div class="col-6">
 								<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-									<option >PV</option>
-									<option>Sofortladen</option>
+									<option>EV 1</option>
+									<option>EV 2</option>
 								</select>
 							</div>
 						</div>
-					</div>
-					<hr>
-					<h3>Einstellungen für den Lademodus</h3>
-					<div class="form-row mb-1">
-						<div class="col-6">Auch ohne PV-Strom laden</div>
-						<div class="col-6">
-							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-								<label class="btn btn-sm btn-outline-info smallTextSize">
-									<input type="radio" name="isss" id="isssOff" value="0">Nein
+						<div class="form-row mb-1">
+							<div class="col-9">
+								<i class="fas fa-star"></i>
+								Priorität
+							</div>
+								<div class="col-3 text-right">
+									<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
+								</div>
+						</div>
+						<div class="form-row mb-1">
+							<div class="col-4">
+								<label class="col-form-label">Lademodus</label>
+							</div>
+							<div class="col btn-group btn-group-toggle" id="lp/1/chargeLimitation" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
+								<label class="btn btn-lg btn-outline-danger btn-toggle smallTextSize">
+									<input type="radio" name="lp/1/chargeLimitation" data-option="0" > Sofortladen
 								</label>
-								<label class="btn btn-sm btn-outline-info smallTextSize">
-									<input type="radio" name="isss" id="isssOn" value="1" checked="checked">Ja
+								<label class="btn btn-lg btn-outline-success btn-toggle smallTextSize">
+									<input type="radio" name="lp/1/chargeLimitation" data-option="2" > PV
+								</label>
+								<label class="btn btn-lg btn-orange btn-toggle smallTextSize">
+									<input type="radio" name="lp/1/chargeLimitation" data-option="1"> Zielladen
+								</label>
+								<label class="btn btn-lg btn-outline-dark btn-toggle smallTextSize">
+									<input type="radio" name="lp/1/chargeLimitation" data-option="3"> Stop
 								</label>
 							</div>
 						</div>
+						<div class="form-row mb-1">
+							<div class="col-9">
+								<i class="fas fa-temperature-high"></i>
+								Vorheizladen
+							</div>
+							<div class="col-3 text-right">
+								<input type="checkbox" data-toggle="toggle" data-on="Ja" data-off="Nein" data-onstyle="success" data-offstyle="danger" data-style="w-100" value="" checked>
+							</div>
+						</div>
 					</div>
+					
+					<h3>Einstellungen für den Lademodus</h3>
 					<div class="form-group mb-0">
 						<div class="form-row vaRow mb-0">
 							<div class="col-6">Minimal Stromstärke</div>
 							<div class="col-6">
 								<form id="minundpvladenEinstellungen"></form>
-								<div class="form-row form-group mb-1 vaRow" data-lp="1">
-									<label for="minCurrentMinPv" class="col-form-label text-right"></label>
-									<div class="col">
-										<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+									<div class="form-row form-group mb-1 vaRow" data-lp="1">
+										<label for="minCurrentMinPv" class="col-form-label text-right"></label>
+										<div class="col">
+											<input type="range" class="form-control-range rangeInput" id="minCurrentMinPv" min="6" max="16" step="1" value="6" data-initialized="0" data-topicprefix="openWB/config/get/pv/">
+										</div>
+										<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
 									</div>
-									<label for="minCurrentMinPv" class="col-form-label valueLabel" suffix="A">11 A</label>
-								</div>
-							</form>
+								</form>
 							</div>
 						</div>
-						<div class="form-row mb-1">
-							<div class="col-6">Laden ab Einspeisungsgrenze</div>
-							<div class="col-6">
-								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
-									</label>
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOn" value="1">Ja
-									</label>
-								</div>
+						<div class="form-row vaRow">
+							<div class="col-4">
+								<label class="col-form-label">Begrenzung</label>
 							</div>
-						</div>
-						<div class="form-row mb-1">
-							<div class="col-6">Speicher-Vorrang</div>
-							<div class="col-6">
-								<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
-									</label>
-									<label class="btn btn-sm btn-info smallTextSize">
-										<input type="radio" name="isss" id="isssOn" value="1">Ja
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="form-row mb-1">
-						<label for="ssdisplay" class="col-6 col-form-label">EV</label>
-						<div class="col-6">
-							<select name="ssdisplay" id="ssdisplay" class="form-control smallTextSize">
-								<option>EV 1</option>
-								<option>EV 2</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-row mb-1">
-						<div class="col-6">Priorität</div>
-						<div class="col-6">
-							<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-								<label class="btn btn-sm btn-info smallTextSize">
-									<input type="radio" name="isss" id="isssOff" value="0" checked="checked">Nein
+							<div class="col btn-group btn-group-toggle" data-toggle="buttons" data-topicprefix="openWB/config/get/sofort/">
+								<label class="btn btn-lg btn-outline-info btn-toggle smallTextSize">
+									<input type="radio"  data-option="0"> keine
 								</label>
-								<label class="btn btn-sm btn-info smallTextSize">
-									<input type="radio" name="isss" id="isssOn" value="1">Ja
+								<label class="socConfiguredLp btn btn-lg btn-outline-info btn-toggle smallTextSize">
+									<input type="radio" data-option="2"> EV-SoC
+								</label>
+								<label class="btn btn-lg btn-outline-info btn-toggle smallTextSize">
+									<input type="radio"  data-option="1" checked="checked"> Energiemenge
 								</label>
 							</div>
 						</div>
