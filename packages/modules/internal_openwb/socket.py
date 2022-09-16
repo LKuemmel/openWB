@@ -67,18 +67,21 @@ class Socket(ChargepointModule):
                 current = 0
             super().set_current(min(current, self.max_current))
 
-    def get_values(self) -> Tuple[ChargepointState, float]:
+    def get_values(self, phase_switch_cp_active: bool) -> Tuple[ChargepointState, float]:
         try:
             actor = ActorState(GPIO.input(19))
         except Exception:
             log.error("Error getting actor status! Using default 'opened'.")
             actor = ActorState.OPENED
         log.debug("Actor: "+str(actor))
-        self.chargepoint_state, self.set_current_evse = super().get_values()
-        if self.chargepoint_state.plug_state is True and actor == ActorState.OPENED:
-            self.__close_actor()
-        if self.chargepoint_state.plug_state is False and actor == ActorState.CLOSED:
-            self.__open_actor()
+        self.chargepoint_state, self.set_current_evse = super().get_values(phase_switch_cp_active)
+        if phase_switch_cp_active:
+            log.debug("Keine Actor-Bewegung, da CP-Unterbrechung oder Phasenumschaltung aktiv.")
+        else:
+            if self.chargepoint_state.plug_state is True and actor == ActorState.OPENED:
+                self.__close_actor()
+            if self.chargepoint_state.plug_state is False and actor == ActorState.CLOSED:
+                self.__open_actor()
         return self.chargepoint_state, self.set_current_evse
 
     def __open_actor(self):

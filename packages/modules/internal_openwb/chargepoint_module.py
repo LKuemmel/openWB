@@ -90,13 +90,14 @@ class ChargepointModule(AbstractChargepoint):
             "Ladepunkt "+str(self.config.id), "chargepoint")
         self.__store = get_chargepoint_value_store(self.config.id)
         self.__client = ClientFactory(self.config.id, self.config.serial_client)
+        self.old_plug_state = False
 
     def set_current(self, current: float) -> None:
         with SingleComponentUpdateContext(self.component_info):
             if self.set_current_evse != current:
                 self.__client.evse_client.set_current(int(current))
 
-    def get_values(self) -> Tuple[ChargepointState, float]:
+    def get_values(self, phase_switch_cp_active: bool) -> Tuple[ChargepointState, float]:
         try:
             _, power = self.__client.meter_client.get_power()
             if power < self.PLUG_STANDBY_POWER_THRESHOLD:
@@ -114,6 +115,14 @@ class ChargepointModule(AbstractChargepoint):
             # reset tag
             if rfid != "0" and plug_state is False:
                 ramdisk_write("readtag", "0")
+
+            if phase_switch_cp_active:
+                # Während des Threads wird die CP-Leitung unterbrochen, das EV soll aber als angesteckt betrachtet
+                # werden. In 1.9 war das kein Problem, da währendessen keine Werte von der EVSE abgefragt wurden.
+                log.debug("Plug_state %s beibehalten, da CP-Unterbrechung oder Phasenumschaltung aktiv.", self.old_plug_state)
+                plug_state = self.old_plug_state
+            else:
+                self.old_plug_state = plug_state
 
             if (max(currents) > 0.1 and charge_state is False) or (max(currents) == 0 and charge_state):
                 raise ValueError("Ladestatus {} passt nicht zu den Strömen {}.".format(charge_state, currents))

@@ -130,24 +130,14 @@ class IsssChargepoint:
         self.old_plug_state = False
 
     def update(self):
-        def __fix_plug_state(thread: Optional[threading.Thread]):
-            """Während des Threads wird die CP-Leitung unterbrochen, das EV soll aber als angesteckt betrachtet
-            werden. In 1.9 war das kein Problem, da währendessen keine Werte von der EVSE abgefragt wurden."""
+        def __thread_active(thread: Optional[threading.Thread]):
             if thread:
-                if thread.is_alive():
-                    self.new_plug_state = self.old_plug_state
+                return thread.is_alive()
         try:
             if self.local_charge_point_num == 2:
                 time.sleep(0.1)
-            state, _ = self.module.get_values()
-            self.new_plug_state = state.plug_state
-            __fix_plug_state(self.update_state.cp_interruption_thread)
-            if self.new_plug_state == state.plug_state:
-                __fix_plug_state(self.update_state.phase_switch_thread)
-            if self.new_plug_state != state.plug_state:
-                state.plug_state = self.new_plug_state
-            else:
-                self.old_plug_state = state.plug_state
+            phase_switch_cp_active = __thread_active(self.update_state.cp_interruption_thread) or __thread_active(self.update_state.phase_switch_thread)
+            state, _ = self.module.get_values(phase_switch_cp_active)
             log.debug("Published plug state "+str(state.plug_state))
             self.update_values.update_values(state)
             self.update_state.update_state()
