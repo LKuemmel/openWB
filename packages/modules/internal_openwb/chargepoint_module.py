@@ -119,7 +119,9 @@ class ChargepointModule(AbstractChargepoint):
             if phase_switch_cp_active:
                 # Während des Threads wird die CP-Leitung unterbrochen, das EV soll aber als angesteckt betrachtet
                 # werden. In 1.9 war das kein Problem, da währendessen keine Werte von der EVSE abgefragt wurden.
-                log.debug("Plug_state %s beibehalten, da CP-Unterbrechung oder Phasenumschaltung aktiv.", self.old_plug_state)
+                log.debug(
+                    "Plug_state %s beibehalten, da CP-Unterbrechung oder Phasenumschaltung aktiv.", self.old_plug_state
+                )
                 plug_state = self.old_plug_state
             else:
                 self.old_plug_state = plug_state
