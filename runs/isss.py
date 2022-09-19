@@ -261,9 +261,11 @@ class IsssChargepoint:
         self.old_plug_state = False
 
     def update(self):
-        def __thread_active(thread: Optional[threading.Thread]):
+        def __thread_active(thread: Optional[threading.Thread]) -> bool:
             if thread:
                 return thread.is_alive()
+            else:
+                return False
         try:
             if self.local_charge_point_num == 2:
                 time.sleep(0.1)
