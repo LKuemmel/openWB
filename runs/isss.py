@@ -58,34 +58,33 @@ class UpdateValues:
             vars_old_counter_state = vars(self.old_counter_state)
             for key, value in vars(counter_state).items():
                 if value != vars_old_counter_state[key]:
-                    # pub to 1.9
-                    topic = self.MAP_KEY_TO_OLD_TOPIC[key]
-                    if topic is not None:
-                        if isinstance(topic, List):
-                            for i in range(0, 3):
-                                self.pub_values_to_1_9(topic[i], value[i])
-                        else:
-                            self.pub_values_to_1_9(self.MAP_KEY_TO_OLD_TOPIC[key], value)
-                    # pub to 2.0
+                    self.pub_values_to_1_9(key, value)
                     self.pub_values_to_2(key, value)
             self.old_counter_state = counter_state
         else:
             # Bei Neustart alles publishen
             for key, value in vars(counter_state).items():
-                # pub to 1.9
-                topic = self.MAP_KEY_TO_OLD_TOPIC[key]
-                if topic is not None:
-                    if isinstance(topic, List):
-                        for i in range(0, 3):
-                            self.pub_values_to_1_9(topic[i], value[i])
-                    else:
-                        self.pub_values_to_1_9(self.MAP_KEY_TO_OLD_TOPIC[key], value)
-                # pub to 2.0
+                self.pub_values_to_1_9(key, value)
                 self.pub_values_to_2(key, value)
+            self.old_counter_state = counter_state
 
-    def pub_values_to_1_9(self, topic: str, value) -> None:
-        pub_single("openWB/lp/1/"+topic, payload=str(value), no_json=True)
-        pub_single("openWB/lp/"+self.cp_num+"/"+topic, payload=str(value), hostname=self.parent_wb, no_json=True)
+    def pub_values_to_1_9(self, key: str, value) -> None:
+        def pub_value(topic: str, value):
+            pub_single("openWB/lp/"+self.cp_num+"/"+topic, payload=str(value), no_json=True)
+            pub_single("openWB/lp/"+self.cp_num+"/"+topic, payload=str(value), hostname=self.parent_wb, no_json=True)
+        topic = self.MAP_KEY_TO_OLD_TOPIC[key]
+        rounding = get_rounding_function_by_digits(2)
+        if topic is not None:
+            if isinstance(topic, List):
+                for i in range(0, 3):
+                    pub_value(topic[i], rounding(value[i]))
+            else:
+                if "power" == key:
+                    value = int(value)
+                if "rfid" == key:
+                    pub_value(self.MAP_KEY_TO_OLD_TOPIC[key], value)
+                else:
+                    pub_value(self.MAP_KEY_TO_OLD_TOPIC[key], rounding(value))
 
     def pub_values_to_2(self, topic: str, value) -> None:
         rounding = get_rounding_function_by_digits(2)
