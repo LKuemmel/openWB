@@ -32,15 +32,6 @@ log.error("Loglevel: "+str(int(os.environ.get('debug'))))
 pymodbus_logger = logging.getLogger("pymodbus")
 pymodbus_logger.setLevel(logging.WARNING)
 
-   if heartbeat > 80:
-        set_current = 0
-        log.error("Heartbeat Fehler seit " + str(heartbeat) + "Sekunden keine Verbindung, Stoppe Ladung.")
-
-# handling of all logging statements
-
-    if cp_interruption_duration > 0:
-        self.__thread_cp_interruption(cp_interruption_duration)
-
 
 class UpdateValues:
     MAP_KEY_TO_OLD_TOPIC = {
@@ -234,12 +225,10 @@ class Isss:
     @staticmethod
     def get_cp_num(local_charge_point_num) -> int:
         try:
-            if lp1lla1 > 3:
-                lp1countphasesinuse = 1
-            if lp1lla2 > 3:
-                lp1countphasesinuse = 2
-            if lp1lla3 > 3:
-                lp1countphasesinuse = 3
+            if local_charge_point_num == 1:
+                return int(re.sub(r'\D', '', ramdisk_read("parentCPlp1")))
+            else:
+                return int(re.sub(r'\D', '', ramdisk_read("parentCPlp2")))
         except Exception:
             FaultState.warning("Es konnte keine Ladepunkt-Nummer ermittelt werden. Auf Default-Wert 0 gesetzt.")
             return 0
