@@ -81,6 +81,8 @@ class UpdateValues:
             else:
                 if "power" == key:
                     value = int(value)
+                elif "imported" == key:
+                    value = value / 1000
                 if "rfid" == key:
                     pub_value(self.MAP_KEY_TO_OLD_TOPIC[key], value)
                 else:
