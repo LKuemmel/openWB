@@ -1,3 +1,4 @@
+import datetime
 import logging
 import RPi.GPIO as GPIO
 import time
@@ -90,6 +91,7 @@ class ChargepointModule(AbstractChargepoint):
             "Ladepunkt "+str(self.config.id), "chargepoint")
         self.__store = get_chargepoint_value_store(self.config.id)
         self.__client = ClientFactory(self.config.id, self.config.serial_client)
+        self.__last_phase_switch = 0
         self.old_plug_state = False
 
     def set_current(self, current: float) -> None:
@@ -162,17 +164,23 @@ class ChargepointModule(AbstractChargepoint):
         return chargepoint_state, self.set_current_evse
 
     def perform_phase_switch(self, phases_to_use: int, duration: int) -> None:
-        gpio_cp, gpio_relay = self.__client.get_pins_phase_switch(phases_to_use)
-        with SingleComponentUpdateContext(self.component_info):
-            self.__client.evse_client.set_current(0)
-        time.sleep(1)
-        GPIO.output(gpio_cp, GPIO.HIGH)  # CP off
-        GPIO.output(gpio_relay, GPIO.HIGH)  # 3 on/off
-        time.sleep(duration)
-        GPIO.output(gpio_relay, GPIO.LOW)  # 3 on/off
-        time.sleep(duration)
-        GPIO.output(gpio_cp, GPIO.LOW)  # CP on
-        time.sleep(1)
+        # Manche EVs brauchen nach der Umschaltung mehrere Zyklen, bis sie mit drei Phasen laden. Dann darf
+        # nicht zwischendurch eine neue Umschaltung getriggert werden.
+        if self.__last_phase_switch + 60 < datetime.datetime.now().timestamp():
+            gpio_cp, gpio_relay = self.__client.get_pins_phase_switch(phases_to_use)
+            with SingleComponentUpdateContext(self.component_info):
+                self.__client.evse_client.set_current(0)
+            time.sleep(1)
+            GPIO.output(gpio_cp, GPIO.HIGH)  # CP off
+            GPIO.output(gpio_relay, GPIO.HIGH)  # 3 on/off
+            time.sleep(duration)
+            GPIO.output(gpio_relay, GPIO.LOW)  # 3 on/off
+            time.sleep(duration)
+            GPIO.output(gpio_cp, GPIO.LOW)  # CP on
+            time.sleep(1)
+            self.__last_phase_switch = time.time() + duration
+        else:
+            log.debug("Phasenumschaltung nicht häufiger als 1 Mal pro Min.")
 
     def perform_cp_interruption(self, duration: int) -> None:
         gpio_cp = self.__client.get_pins_cp_interruption()
