@@ -106,14 +106,13 @@ class UpdateValues:
 
 class UpdateState:
     def __init__(self, cp_module: chargepoint_module.ChargepointModule) -> None:
-        self.old_phases_to_use = 3
         self.old_set_current = 0
         self.phase_switch_thread = None  # type: Optional[threading.Thread]
         self.cp_interruption_thread = None  # type: Optional[threading.Thread]
         self.actor_cooldown_thread = None  # type: Optional[threading.Thread]
         self.cp_module = cp_module
 
-    def update_state(self) -> None:
+    def update_state(self, counter_state: ChargepointState) -> None:
         if self.cp_module.config.id == 1:
             suffix = ""
         else:
@@ -152,10 +151,9 @@ class UpdateState:
                           " noch aktiv. Es muss erst gewartet werden, bis die CP-Unterbrechung abgeschlossen ist.")
                 return
         self.cp_module.set_current(set_current)
-        if self.old_phases_to_use != phases_to_use:
-            log.debug("Switch Phases from "+str(self.old_phases_to_use) + " to " + str(phases_to_use))
+        if counter_state.phases_in_use != phases_to_use:
+            log.debug("Switch Phases from "+str(counter_state.phases_in_use) + " to " + str(phases_to_use))
             self.__thread_phase_switch(phases_to_use)
-            self.old_phases_to_use = phases_to_use
 
         if cp_interruption_duration > 0:
             self.__thread_cp_interruption(cp_interruption_duration)
@@ -274,7 +272,7 @@ class IsssChargepoint:
             state, _ = self.module.get_values(phase_switch_cp_active)
             log.debug("Published plug state "+str(state.plug_state))
             self.update_values.update_values(state)
-            self.update_state.update_state()
+            self.update_state.update_state(state)
         except Exception:
             log.exception("Fehler bei Ladepunkt "+str(self.local_charge_point_num))
 
