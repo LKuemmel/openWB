@@ -72,6 +72,7 @@
 									<optgroup label="andere Hersteller">
 										<option <?php if($pvwattmodulold == "wr_alphaess") echo "selected" ?> value="wr_alphaess">AlphaESS-Speicher</option>
 										<option <?php if($pvwattmodulold == "wr_batterx") echo "selected" ?> value="wr_batterx">BatterX</option>
+										<option <?php if($pvwattmodulold == "wr_deye") echo "selected" ?> value="wr_deye">Bosswerk/Deye SUN600/800/1000G3-EU-230</option>
 										<option <?php if($pvwattmodulold == "wr_discovergy") echo "selected" ?> value="wr_discovergy">Discovergy</option>
 										<option <?php if($pvwattmodulold == "wr_enphase") echo "selected" ?> value="wr_enphase">Enphase Envoy / IQ Gateway</option>
 										<option <?php if($pvwattmodulold == "wr_fronius") echo "selected" ?> value="wr_fronius">Fronius WR</option>
@@ -249,6 +250,35 @@
 									</div>
 									<span class="form-text small">
 										Diese Option aktivieren wenn statt des S0 der andere Eingang des Youless genutzt wird.
+									</span>
+								</div>
+							</div>
+						</div>
+						<div id="pvdeye" class="hide">
+							<div class="form-row mb-1">
+								<label for="wrdeyehost" class="col-md-4 col-form-label">IP Adresse</label>
+								<div class="col">
+									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="wrdeyehost" id="wrdeyehost" value="<?php echo $wrdeyehostold ?>">
+									<span class="form-text small">
+										Gültige Werte IP Adresse im Format: 192.168.0.165
+									</span>
+								</div>
+							</div>
+							<div class="form-row mb-1">
+								<label for="wrdeyeusername" class="col-md-4 col-form-label">Benutzername</label>
+								<div class="col">
+									<input class="form-control" type="text" name="wrdeyeusername" id="wrdeyeusername" value="<?php echo $wrdeyeusernameold ?>">
+									<span class="form-text small">
+										Standard Benutzername: admin
+									</span>
+								</div>
+							</div>
+							<div class="form-row mb-1">
+								<label for="wrdeyepassword" class="col-md-4 col-form-label">Passwort</label>
+								<div class="col">
+									<input class="form-control" type="password" name="wrdeyepassword" id="wrdeyepassword" value="<?php echo htmlspecialchars($wrdeyepasswordold) ?>">
+									<span class="form-text small">
+										Standard Passwort: admin
 									</span>
 								</div>
 							</div>
@@ -964,6 +994,7 @@
 								hideSection('#pvsolarview');
 								hideSection('#pvdiscovergy');
 								hideSection('#pvyouless');
+								hideSection('#pvdeye');
 								hideSection('#pvlgessv1');
 								hideSection('#pvmqtt');
 								hideSection('#pvsunways');
@@ -1026,6 +1057,9 @@
 								}
 								if($('#pvwattmodul').val() == 'wr_youless120') {
 									showSection('#pvyouless');
+								}
+								if($('#pvwattmodul').val() == 'wr_deye') {
+									showSection('#pvdeye');
 								}
 								if($('#pvwattmodul').val() == 'wr_solarview') {
 									showSection('#pvsolarview');
@@ -1150,6 +1184,7 @@
 										<option <?php if($pv2wattmodulold == "wr2_ethlovato") echo "selected" ?> value="wr2_ethlovato">openWB PV Kit</option>
 									</optgroup>
 									<optgroup label="andere Hersteller">
+										<option <?php if($pv2wattmodulold == "wr2_deye") echo "selected" ?> value="wr2_deye">Bosswerk/Deye SUN600/800/1000G3-EU-230</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpiko") echo "selected" ?> value="wr2_kostalpiko">Kostal Piko</option>
 										<option <?php if($pv2wattmodulold == "wr2_solarmax") echo "selected" ?> value="wr2_solarmax">Solarmax</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpikovar2") echo "selected" ?> value="wr2_kostalpikovar2">Kostal Piko alt</option>
@@ -1290,6 +1325,35 @@
 									</div>
 								</div>
 						</div>
+						<div id="pv2deye" class="hide">
+							<div class="form-row mb-1">
+								<label for="wr2deyehost" class="col-md-4 col-form-label">IP Adresse</label>
+								<div class="col">
+									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="wr2deyehost" id="wr2deyehost" value="<?php echo $wr2deyehostold ?>">
+									<span class="form-text small">
+										Gültige Werte IP Adresse im Format: 192.168.0.165
+									</span>
+								</div>
+							</div>
+							<div class="form-row mb-1">
+								<label for="w2rdeyeusername" class="col-md-4 col-form-label">Benutzername</label>
+								<div class="col">
+									<input class="form-control" type="text" name="wr2deyeusername" id="wr2deyeusername" value="<?php echo $wr2deyeusernameold ?>">
+									<span class="form-text small">
+										Standard Benutzername: admin
+									</span>
+								</div>
+							</div>
+							<div class="form-row mb-1">
+								<label for="wr2deyepassword" class="col-md-4 col-form-label">Passwort</label>
+								<div class="col">
+									<input class="form-control" type="password" name="wr2deyepassword" id="wr2deyepassword" value="<?php echo htmlspecialchars($wr2deyepasswordold) ?>">
+									<span class="form-text small">
+										Standard Passwort: admin
+									</span>
+								</div>
+							</div>
+						</div>
 						<div id="pv2wrjsondiv" class="hide">
 							<div class="form-row mb-1">
 								<label for="wr2jsonurl" class="col-md-4 col-form-label">WR URL</label>
@@ -1388,6 +1452,7 @@
 						</div>
 						<script>
 							function display_pv2wattmodul() {
+								hideSection('#pv2deye');
 								hideSection('#pv2noconfig');
 								hideSection('#pv2ipdiv');
 								hideSection('#pv2portdiv');
@@ -1404,6 +1469,9 @@
 								hideSection('#pv2smamodbus');
 								hideSection('#pv2kostalstecavariant');
 
+								if($('#pv2wattmodul').val() == 'wr2_deye') {
+									showSection('#pv2deye');
+								}
 								if($('#pv2wattmodul').val() == 'wr2_kostalpikovar2') {
 									showSection('#pv2piko2');
 								}

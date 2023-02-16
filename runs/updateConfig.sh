@@ -410,6 +410,36 @@ updateConfig(){
 	else
 		sed -i "/wr2jsonurl='/b; s/^wr2jsonurl=\(.*\)/wr2jsonurl=\'\1\'/g" $ConfigFile
 	fi
+	if ! grep -Fq "wrdeyehost=" $ConfigFile; then
+		echo "wrdeyehost='192.168.0.165'" >> $ConfigFile
+	else
+		sed -i "/wrdeyehost='/b; s/^wrdeyehost=\(.*\)/wrdeyehost=\'\1\'/g" $ConfigFile
+	fi
+	if ! grep -Fq "wrdeyeusername=" $ConfigFile; then
+		echo "wrdeyeusername='admin'" >> $ConfigFile
+	else
+		sed -i "/wrdeyeusername='/b; s/^wrdeyeusername=\(.*\)/wrdeyeusername=\'\1\'/g" $ConfigFile
+	fi
+	if ! grep -Fq "wrdeyepassword=" $ConfigFile; then
+		echo "wrdeyepassword='secret'" >> $ConfigFile
+	else
+		sed -i "/wrdeyepassword='/b; s/^wrdeyepassword=\(.*\)/wrdeyepassword=\'\1\'/g" $ConfigFile
+	fi
+	if ! grep -Fq "wr2deyehost=" $ConfigFile; then
+		echo "wr2deyehost='192.168.0.165'" >> $ConfigFile
+	else
+		sed -i "/wr2deyehost='/b; s/^wr2deyehost=\(.*\)/wr2deyehost=\'\1\'/g" $ConfigFile
+	fi
+	if ! grep -Fq "wr2deyeusername=" $ConfigFile; then
+		echo "wr2deyeusername='admin'" >> $ConfigFile
+	else
+		sed -i "/wr2deyeusername='/b; s/^wr2deyeusername=\(.*\)/wr2deyeusername=\'\1\'/g" $ConfigFile
+	fi
+	if ! grep -Fq "wr2deyepassword=" $ConfigFile; then
+		echo "wr2deyepassword='secret'" >> $ConfigFile
+	else
+		sed -i "/wr2deyepassword='/b; s/^wr2deyepassword=\(.*\)/wr2deyepassword=\'\1\'/g" $ConfigFile
+	fi
 	if ! grep -Fq "hausbezugnone=" $ConfigFile; then
 		echo "hausbezugnone=200" >> $ConfigFile
 	fi
