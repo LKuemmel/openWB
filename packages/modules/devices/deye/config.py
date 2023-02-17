@@ -15,7 +15,7 @@ class DeyeConfiguration:
 
 class Deye:
     def __init__(self,
-                 name: str = "Bosswerk/Deye SUN600/800/1000G3-EU-230 (Microinverter)",
+                 name: str = "Bosswerk/Deye SUN600/800/1000G3-EU-230 (Microinverter) (Anbindung per WiFi)",
                  type: str = "deye",
                  id: int = 0,
                  configuration: DeyeConfiguration = None) -> None:
