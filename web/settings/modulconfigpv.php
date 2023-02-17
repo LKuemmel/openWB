@@ -72,7 +72,7 @@
 									<optgroup label="andere Hersteller">
 										<option <?php if($pvwattmodulold == "wr_alphaess") echo "selected" ?> value="wr_alphaess">AlphaESS-Speicher</option>
 										<option <?php if($pvwattmodulold == "wr_batterx") echo "selected" ?> value="wr_batterx">BatterX</option>
-										<option <?php if($pvwattmodulold == "wr_deye") echo "selected" ?> value="wr_deye">Bosswerk/Deye SUN600/800/1000G3-EU-230</option>
+										<option <?php if($pvwattmodulold == "wr_deye_modbus") echo "selected" ?> value="wr_deye_modbus">Deye (Anbindung per Modbus)</option>
 										<option <?php if($pvwattmodulold == "wr_discovergy") echo "selected" ?> value="wr_discovergy">Discovergy</option>
 										<option <?php if($pvwattmodulold == "wr_enphase") echo "selected" ?> value="wr_enphase">Enphase Envoy / IQ Gateway</option>
 										<option <?php if($pvwattmodulold == "wr_fronius") echo "selected" ?> value="wr_fronius">Fronius WR</option>
@@ -254,32 +254,31 @@
 								</div>
 							</div>
 						</div>
-						<div id="pvdeye" class="hide">
+						<div id="pvdeyemodbus" class="hide">
 							<div class="form-row mb-1">
-								<label for="wrdeyehost" class="col-md-4 col-form-label">IP Adresse</label>
+								<label for="pvdeyemodbusip" class="col-md-4 col-form-label">IP-Adresse</label>
 								<div class="col">
-									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="wrdeyehost" id="wrdeyehost" value="<?php echo $wrdeyehostold ?>">
+									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="pvdeyemodbusip" id="pvdeyemodbusip" value="<?php echo $pvdeyemodbusipold ?>">
 									<span class="form-text small">
-										Gültige Werte IP Adresse im Format: 192.168.0.165
+										Gültige Werte IP Adresse im Format: 192.168.0.12<br>
+										IP Adresse des Protoss/Elfin Adapters.
 									</span>
 								</div>
 							</div>
 							<div class="form-row mb-1">
-								<label for="wrdeyeusername" class="col-md-4 col-form-label">Benutzername</label>
+								<label for="pvdeyemodbusport" class="col-md-4 col-form-label">Port</label>
 								<div class="col">
-									<input class="form-control" type="text" name="wrdeyeusername" id="wrdeyeusername" value="<?php echo $wrdeyeusernameold ?>">
+									<input class="form-control" type="number" min="1" step="1" name="pvdeyemodbusport" id="pvdeyemodbusport" value="<?php echo (empty($pvdeyemodbusportold)?'502':$pvdeyemodbusportold) ?>">
 									<span class="form-text small">
-										Standard Benutzername: admin
+										TCP Port der im Protoss/Elfin konfiguriert ist.<br>
 									</span>
 								</div>
 							</div>
 							<div class="form-row mb-1">
-								<label for="wrdeyepassword" class="col-md-4 col-form-label">Passwort</label>
+								<label for="pvdeyemodbusid" class="col-md-4 col-form-label">Unit ID</label>
 								<div class="col">
-									<input class="form-control" type="password" name="wrdeyepassword" id="wrdeyepassword" value="<?php echo htmlspecialchars($wrdeyepasswordold) ?>">
-									<span class="form-text small">
-										Standard Passwort: admin
-									</span>
+									<input class="form-control" type="number" min="1" max="254" step="1" name="pvdeyemodbusid" id="pvdeyemodbusid" value="<?php echo $pvdeyemodbusidold ?>">
+									<span class="form-text small">Gültige Werte 1-254. Modbus ID des Gerätes.</span>
 								</div>
 							</div>
 						</div>
@@ -994,7 +993,7 @@
 								hideSection('#pvsolarview');
 								hideSection('#pvdiscovergy');
 								hideSection('#pvyouless');
-								hideSection('#pvdeye');
+								hideSection('#pvdeyemodbus');
 								hideSection('#pvlgessv1');
 								hideSection('#pvmqtt');
 								hideSection('#pvsunways');
@@ -1058,8 +1057,8 @@
 								if($('#pvwattmodul').val() == 'wr_youless120') {
 									showSection('#pvyouless');
 								}
-								if($('#pvwattmodul').val() == 'wr_deye') {
-									showSection('#pvdeye');
+								if($('#pvwattmodul').val() == 'wr_deye_modbus') {
+									showSection('#pvdeyemodbus');
 								}
 								if($('#pvwattmodul').val() == 'wr_solarview') {
 									showSection('#pvsolarview');
@@ -1184,7 +1183,7 @@
 										<option <?php if($pv2wattmodulold == "wr2_ethlovato") echo "selected" ?> value="wr2_ethlovato">openWB PV Kit</option>
 									</optgroup>
 									<optgroup label="andere Hersteller">
-										<option <?php if($pv2wattmodulold == "wr2_deye") echo "selected" ?> value="wr2_deye">Bosswerk/Deye SUN600/800/1000G3-EU-230</option>
+										<option <?php if($pv2wattmodulold == "wr2_deyemodbusmodbus") echo "selected" ?> value="wr2_deyemodbus">Deye (Anbindung per Modbus)</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpiko") echo "selected" ?> value="wr2_kostalpiko">Kostal Piko</option>
 										<option <?php if($pv2wattmodulold == "wr2_solarmax") echo "selected" ?> value="wr2_solarmax">Solarmax</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpikovar2") echo "selected" ?> value="wr2_kostalpikovar2">Kostal Piko alt</option>
@@ -1325,32 +1324,31 @@
 									</div>
 								</div>
 						</div>
-						<div id="pv2deye" class="hide">
+						<div id="pv2deyemodbus" class="hide">
 							<div class="form-row mb-1">
-								<label for="wr2deyehost" class="col-md-4 col-form-label">IP Adresse</label>
+								<label for="pv2deyemodbusip" class="col-md-4 col-form-label">IP-Adresse</label>
 								<div class="col">
-									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="wr2deyehost" id="wr2deyehost" value="<?php echo $wr2deyehostold ?>">
+									<input class="form-control" type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" name="pv2deyemodbusip" id="pv2deyemodbusip" value="<?php echo $pv2deyemodbusipold ?>">
 									<span class="form-text small">
-										Gültige Werte IP Adresse im Format: 192.168.0.165
+										Gültige Werte IP Adresse im Format: 192.168.0.12<br>
+										IP Adresse des Protoss/Elfin Adapters.
 									</span>
 								</div>
 							</div>
 							<div class="form-row mb-1">
-								<label for="w2rdeyeusername" class="col-md-4 col-form-label">Benutzername</label>
+								<label for="pv2deyemodbusport" class="col-md-4 col-form-label">Port</label>
 								<div class="col">
-									<input class="form-control" type="text" name="wr2deyeusername" id="wr2deyeusername" value="<?php echo $wr2deyeusernameold ?>">
+									<input class="form-control" type="number" min="1" step="1" name="pv2deyemodbusport" id="pv2deyemodbusport" value="<?php echo (empty($pv2deyemodbusportold)?'502':$pv2deyemodbusportold) ?>">
 									<span class="form-text small">
-										Standard Benutzername: admin
+										TCP Port der im Protoss/Elfin konfiguriert ist.<br>
 									</span>
 								</div>
 							</div>
 							<div class="form-row mb-1">
-								<label for="wr2deyepassword" class="col-md-4 col-form-label">Passwort</label>
+								<label for="pv2deyemodbusid" class="col-md-4 col-form-label">Unit ID</label>
 								<div class="col">
-									<input class="form-control" type="password" name="wr2deyepassword" id="wr2deyepassword" value="<?php echo htmlspecialchars($wr2deyepasswordold) ?>">
-									<span class="form-text small">
-										Standard Passwort: admin
-									</span>
+									<input class="form-control" type="number" min="1" max="254" step="1" name="pv2deyemodbusid" id="pv2deyemodbusid" value="<?php echo $pv2deyemodbusidold ?>">
+									<span class="form-text small">Gültige Werte 1-254. Modbus ID des Gerätes.</span>
 								</div>
 							</div>
 						</div>
@@ -1452,7 +1450,7 @@
 						</div>
 						<script>
 							function display_pv2wattmodul() {
-								hideSection('#pv2deye');
+								hideSection('#pv2deyemodbus');
 								hideSection('#pv2noconfig');
 								hideSection('#pv2ipdiv');
 								hideSection('#pv2portdiv');
@@ -1469,8 +1467,8 @@
 								hideSection('#pv2smamodbus');
 								hideSection('#pv2kostalstecavariant');
 
-								if($('#pv2wattmodul').val() == 'wr2_deye') {
-									showSection('#pv2deye');
+								if($('#pv2wattmodul').val() == 'wr2_deyemodbus') {
+									showSection('#pv2deyemodbus');
 								}
 								if($('#pv2wattmodul').val() == 'wr2_kostalpikovar2') {
 									showSection('#pv2piko2');

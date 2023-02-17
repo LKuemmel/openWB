@@ -410,35 +410,35 @@ updateConfig(){
 	else
 		sed -i "/wr2jsonurl='/b; s/^wr2jsonurl=\(.*\)/wr2jsonurl=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wrdeyehost=" $ConfigFile; then
-		echo "wrdeyehost='192.168.0.165'" >> $ConfigFile
+	if ! grep -Fq "pvdeyemodbusip=" $ConfigFile; then
+		echo "pvdeyemodbusip='192.168.0.165'" >> $ConfigFile
 	else
-		sed -i "/wrdeyehost='/b; s/^wrdeyehost=\(.*\)/wrdeyehost=\'\1\'/g" $ConfigFile
+		sed -i "/pvdeyemodbusip='/b; s/^pvdeyemodbusip=\(.*\)/pvdeyemodbusip=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wrdeyeusername=" $ConfigFile; then
-		echo "wrdeyeusername='admin'" >> $ConfigFile
+	if ! grep -Fq "pvdeyemodbusport=" $ConfigFile; then
+		echo "pvdeyemodbusport=8899" >> $ConfigFile
 	else
-		sed -i "/wrdeyeusername='/b; s/^wrdeyeusername=\(.*\)/wrdeyeusername=\'\1\'/g" $ConfigFile
+		sed -i "/pvdeyemodbusport='/b; s/^pvdeyemodbusport=\(.*\)/pvdeyemodbusport=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wrdeyepassword=" $ConfigFile; then
-		echo "wrdeyepassword='secret'" >> $ConfigFile
+	if ! grep -Fq "pvdeyemodbusid=" $ConfigFile; then
+		echo "pvdeyemodbusid=1" >> $ConfigFile
 	else
-		sed -i "/wrdeyepassword='/b; s/^wrdeyepassword=\(.*\)/wrdeyepassword=\'\1\'/g" $ConfigFile
+		sed -i "/pvdeyemodbusid='/b; s/^pvdeyemodbusid=\(.*\)/pvdeyemodbusid=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wr2deyehost=" $ConfigFile; then
-		echo "wr2deyehost='192.168.0.165'" >> $ConfigFile
+	if ! grep -Fq "pv2deyemodbusip=" $ConfigFile; then
+		echo "pv2deyemodbusip='192.168.0.165'" >> $ConfigFile
 	else
-		sed -i "/wr2deyehost='/b; s/^wr2deyehost=\(.*\)/wr2deyehost=\'\1\'/g" $ConfigFile
+		sed -i "/pv2deyemodbusip='/b; s/^pv2deyemodbusip=\(.*\)/pv2deyemodbusip=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wr2deyeusername=" $ConfigFile; then
-		echo "wr2deyeusername='admin'" >> $ConfigFile
+	if ! grep -Fq "pv2deyemodbusport=" $ConfigFile; then
+		echo "pv2deyemodbusport=8899" >> $ConfigFile
 	else
-		sed -i "/wr2deyeusername='/b; s/^wr2deyeusername=\(.*\)/wr2deyeusername=\'\1\'/g" $ConfigFile
+		sed -i "/pv2deyemodbusport='/b; s/^pv2deyemodbusport=\(.*\)/pv2deyemodbusport=\'\1\'/g" $ConfigFile
 	fi
-	if ! grep -Fq "wr2deyepassword=" $ConfigFile; then
-		echo "wr2deyepassword='secret'" >> $ConfigFile
+	if ! grep -Fq "pv2deyemodbusid=" $ConfigFile; then
+		echo "pv2deyemodbusid=1" >> $ConfigFile
 	else
-		sed -i "/wr2deyepassword='/b; s/^wr2deyepassword=\(.*\)/wr2deyepassword=\'\1\'/g" $ConfigFile
+		sed -i "/pv2deyemodbusid='/b; s/^pv2deyemodbusid=\(.*\)/pv2deyemodbusid=\'\1\'/g" $ConfigFile
 	fi
 	if ! grep -Fq "hausbezugnone=" $ConfigFile; then
 		echo "hausbezugnone=200" >> $ConfigFile
