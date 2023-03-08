@@ -72,7 +72,7 @@
 									<optgroup label="andere Hersteller">
 										<option <?php if($pvwattmodulold == "wr_alphaess") echo "selected" ?> value="wr_alphaess">AlphaESS-Speicher</option>
 										<option <?php if($pvwattmodulold == "wr_batterx") echo "selected" ?> value="wr_batterx">BatterX</option>
-										<option <?php if($pvwattmodulold == "wr_deye_modbus") echo "selected" ?> value="wr_deye_modbus">Deye (Anbindung per Modbus)</option>
+										<option <?php if($pvwattmodulold == "wr_deye") echo "selected" ?> value="wr_deye">Deye (Anbindung per Modbus)</option>
 										<option <?php if($pvwattmodulold == "wr_discovergy") echo "selected" ?> value="wr_discovergy">Discovergy</option>
 										<option <?php if($pvwattmodulold == "wr_enphase") echo "selected" ?> value="wr_enphase">Enphase Envoy / IQ Gateway</option>
 										<option <?php if($pvwattmodulold == "wr_fronius") echo "selected" ?> value="wr_fronius">Fronius WR</option>
@@ -1057,7 +1057,7 @@
 								if($('#pvwattmodul').val() == 'wr_youless120') {
 									showSection('#pvyouless');
 								}
-								if($('#pvwattmodul').val() == 'wr_deye_modbus') {
+								if($('#pvwattmodul').val() == 'wr_deye') {
 									showSection('#pvdeyemodbus');
 								}
 								if($('#pvwattmodul').val() == 'wr_solarview') {
@@ -1183,7 +1183,7 @@
 										<option <?php if($pv2wattmodulold == "wr2_ethlovato") echo "selected" ?> value="wr2_ethlovato">openWB PV Kit</option>
 									</optgroup>
 									<optgroup label="andere Hersteller">
-										<option <?php if($pv2wattmodulold == "wr2_deyemodbusmodbus") echo "selected" ?> value="wr2_deyemodbus">Deye (Anbindung per Modbus)</option>
+										<option <?php if($pv2wattmodulold == "wr2_deye") echo "selected" ?> value="wr2_deye">Deye (Anbindung per Modbus)</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpiko") echo "selected" ?> value="wr2_kostalpiko">Kostal Piko</option>
 										<option <?php if($pv2wattmodulold == "wr2_solarmax") echo "selected" ?> value="wr2_solarmax">Solarmax</option>
 										<option <?php if($pv2wattmodulold == "wr2_kostalpikovar2") echo "selected" ?> value="wr2_kostalpikovar2">Kostal Piko alt</option>
@@ -1467,7 +1467,7 @@
 								hideSection('#pv2smamodbus');
 								hideSection('#pv2kostalstecavariant');
 
-								if($('#pv2wattmodul').val() == 'wr2_deyemodbus') {
+								if($('#pv2wattmodul').val() == 'wr2_deye') {
 									showSection('#pv2deyemodbus');
 								}
 								if($('#pv2wattmodul').val() == 'wr2_kostalpikovar2') {

@@ -71,6 +71,7 @@
 										<option <?php if($wattbezugmodulold == "bezug_alphaess") echo "selected" ?> value="bezug_alphaess">Alpha ESS</option>
 										<option <?php if($wattbezugmodulold == "bezug_batterx") echo "selected" ?> value="bezug_batterx">BatterX</option>
 										<option <?php if($wattbezugmodulold == "bezug_carlogavazzilan") echo "selected" ?> value="bezug_carlogavazzilan">Carlo Gavazzi EM24 LAN</option>
+										<option <?php if($wattbezugmodulold == "bezug_deye") echo "selected" ?> value="bezug_deye">Deye</option>
 										<option <?php if($wattbezugmodulold == "bezug_discovergy") echo "selected" ?> value="bezug_discovergy">Discovergy</option>
 										<option <?php if($wattbezugmodulold == "bezug_e3dc") echo "selected" ?> value="bezug_e3dc">E3DC Speicher</option>
 										<option <?php if($wattbezugmodulold == "bezug_enphase") echo "selected" ?> value="bezug_enphase">Enphase Envoy / IQ Gateway</option>
@@ -124,6 +125,11 @@
 							</div>
 						</div>
 						<div id="wattbezuggoodwe" class="hide">
+							<div class="card-text alert alert-info">
+								Konfiguration im Wechselrichter
+							</div>
+						</div>
+						<div id="wattbezugdeye" class="hide">
 							<div class="card-text alert alert-info">
 								Konfiguration im Wechselrichter
 							</div>
@@ -1035,6 +1041,7 @@
 								hideSection('#wattbezugjanitza');
 								hideSection('#wattbezugcarlogavazzilan');
 								hideSection('#wattbezugenphase');
+								hideSection('#wattbezugdeye');
 								// Auswahl PV-Modul generell erlauben
 								//enable_pv_selector();
 								if($('#wattbezugmodul').val() != 'none') {
@@ -1196,6 +1203,9 @@
 								}
 								if($('#wattbezugmodul').val() == 'bezug_enphase')   {
 									showSection('#wattbezugenphase');
+								}
+								if($('#wattbezugmodul').val() == 'bezug_deye')   {
+									showSection('#wattbezugdeye');
 								}
 							}
 

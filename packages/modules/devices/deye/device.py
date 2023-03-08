@@ -1,24 +1,32 @@
 #!/usr/bin/env python3
 import logging
-from typing import Iterable, Optional, List
+from typing import Iterable, Optional, List, Union
 
 from helpermodules.cli import run_using_positional_cli_args
 from modules.common.abstract_device import DeviceDescriptor
 from modules.common.component_context import SingleComponentUpdateContext
 from modules.common.configurable_device import ConfigurableDevice, ComponentFactoryByType, MultiComponentUpdater
 from modules.common.modbus import ModbusTcpClient_
-from modules.devices.deye_modbus.inverter import DeyeModbusInverter
-from modules.devices.deye_modbus import inverter
-from modules.devices.deye_modbus.config import DeyeModbus, DeyeModbusConfiguration, DeyeModbusInverterSetup
+from modules.devices.deye.bat import DeyeBat
+from modules.devices.deye.counter import DeyeCounter
+from modules.devices.deye.inverter import DeyeInverter
+from modules.devices.deye import bat, counter, inverter
+from modules.devices.deye.config import Deye, DeyeBatSetup, DeyeConfiguration, DeyeCounterSetup, DeyeInverterSetup
 
 log = logging.getLogger(__name__)
 
 
-def create_device(device_config: DeyeModbus):
-    def create_inverter_component(component_config: DeyeModbusInverterSetup):
-        return DeyeModbusInverter(component_config)
+def create_device(device_config: Deye):
+    def create_bat_component(component_config: DeyeBatSetup):
+        return DeyeBat(component_config)
 
-    def update_components(components: Iterable[DeyeModbusInverter]):
+    def create_counter_component(component_config: DeyeCounterSetup):
+        return DeyeCounter(component_config)
+
+    def create_inverter_component(component_config: DeyeInverterSetup):
+        return DeyeInverter(component_config)
+
+    def update_components(components: Iterable[Union[DeyeBat, DeyeCounter, DeyeInverter]]):
         with client as c:
             for component in components:
                 with SingleComponentUpdateContext(component.component_info):
@@ -31,6 +39,8 @@ def create_device(device_config: DeyeModbus):
     return ConfigurableDevice(
         device_config=device_config,
         component_factory=ComponentFactoryByType(
+            bat=create_bat_component,
+            counter=create_counter_component,
             inverter=create_inverter_component,
         ),
         component_updater=MultiComponentUpdater(update_components)
@@ -38,12 +48,14 @@ def create_device(device_config: DeyeModbus):
 
 
 COMPONENT_TYPE_TO_MODULE = {
+    "bat": bat,
+    "counter": counter,
     "inverter": inverter
 }
 
 
 def read_legacy(component_type: str, ip_address: str, port: int, modbus_id: int, num: Optional[int] = None) -> None:
-    device_config = DeyeModbus(configuration=DeyeModbusConfiguration(
+    device_config = Deye(configuration=DeyeConfiguration(
         port=port, ip_address=ip_address))
 
     dev = create_device(device_config)
@@ -69,4 +81,4 @@ def main(argv: List[str]):
     run_using_positional_cli_args(read_legacy, argv)
 
 
-device_descriptor = DeviceDescriptor(configuration_factory=DeyeModbus)
+device_descriptor = DeviceDescriptor(configuration_factory=Deye)

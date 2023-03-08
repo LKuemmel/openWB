@@ -72,6 +72,7 @@
 										<option <?php if($speichermodulold == "speicher_alphaess") echo "selected" ?> value="speicher_alphaess">Alpha ESS</option>
 										<option <?php if($speichermodulold == "speicher_batterx") echo "selected" ?> value="speicher_batterx">BatterX</option>
 										<option <?php if($speichermodulold == "speicher_bydhv") echo "selected" ?> value="speicher_bydhv">BYD</option>
+										<option <?php if($speichermodulold == "speicher_deye") echo "selected" ?> value="speicher_deye">Deye</option>
 										<option <?php if($speichermodulold == "speicher_e3dc") echo "selected" ?> value="speicher_e3dc">E3DC Speicher</option>
 										<option <?php if($speichermodulold == "speicher_good_we") echo "selected" ?> value="speicher_good_we">GoodWe</option>
 										<option <?php if($speichermodulold == "speicher_huawei") echo "selected" ?> value="speicher_huawei">Huawei</option>
@@ -373,6 +374,12 @@
 						</div>
 
 						<div id="divspeichergoodwe" class="hide">
+							<div class="card-text alert alert-info">
+								Konfiguration im Wechselrichter
+							</div>
+						</div>
+
+						<div id="divspeicherdeye" class="hide">
 							<div class="card-text alert alert-info">
 								Konfiguration im Wechselrichter
 							</div>
@@ -745,6 +752,7 @@
 								hideSection('#divspeicherhttp');
 								hideSection('#divspeichermpm3pm');
 								hideSection('#divspeicherbydhv');
+								hideSection('#divspeicherdeye');
 								hideSection('#divspeicherfronius');
 								hideSection('#divspeichere3dc');
 								hideSection('#divspeichersbs25');
@@ -853,6 +861,9 @@
 								}
 								if($('#speichermodul').val() == 'speicher_bydhv')   {
 									showSection('#divspeicherbydhv');
+								}
+								if($('#speichermodul').val() == 'speicher_deye')   {
+									showSection('#divspeicherdeye');
 								}
 								if($('#speichermodul').val() == 'speicher_fronius')   {
 									showSection('#divspeicherfronius');
